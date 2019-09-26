@@ -19,26 +19,24 @@ class Create_Fields {
 
 
 	public function admin_menu() {
-		add_submenu_page( 'edit.php?post_type=opalestate_property', __( 'Custom Fields', 'opal-estate-custom-fields' ), __( 'Fields creator', 'opal-estate-custom-fields' ),
-			'manage_opalestate_settings', 'opal-create-fields',
+		add_submenu_page( 'edit.php?post_type=opalestate_property', esc_html__( 'Custom Fields', 'opal-estate-custom-fields' ), esc_html__( 'Custom Fields', 'opal-estate-custom-fields' ),
+			'manage_opalestate_settings', 'opal-estate-custom-fields',
 			[ $this, 'admin_page_display' ] );
 	}
 
 
 	public function create_option_select() {
-
 		if ( isset( $_POST['index'] ) && isset( $_POST['checked_default'] ) && isset( $_POST['option_index'] ) ) {
-
 			$args = [
 				'index'           => $_POST['index'],
 				'checked_default' => $_POST['checked_default'],
 				'option_index'    => $_POST['option_index'],
 			];
 
-			$Elements = new Elements();
+			$elements = new Elements();
 
 			ob_start();
-			$Elements->select_option( $args );
+			$elements->select_option( $args );
 			$html = ob_get_contents();
 			ob_end_clean();
 
@@ -56,26 +54,26 @@ class Create_Fields {
 
 		$type = $_POST['type'];
 
-		$Elements = new Elements();
+		$elements = new Elements();
 
 		ob_start();
 
 		switch ( $type ) {
-			case "textarea":
-				$Elements->textarea();
+			case 'textarea':
+				$elements->textarea();
 				break;
-			case "select":
-				$Elements->select();
+			case 'select':
+				$elements->select();
 				break;
-			case "checkbox";
-				$Elements->checkbox();
+			case 'checkbox';
+				$elements->checkbox();
 				break;
-			case "text_date":
-				$Elements->text_date();
+			case 'text_date':
+				$elements->text_date();
 				break;
-			case "text":
+			case 'text':
 			default:
-				$Elements->text();
+				$elements->text();
 				break;
 		}
 
@@ -90,10 +88,9 @@ class Create_Fields {
 
 
 	public function save_data() {
+		if ( isset( $_POST['nonce_field_save_custom_fields'] ) ) {
 
-		if ( isset( $_POST['nonce_field_save_etfields'] ) ) {
-
-			if ( wp_verify_nonce( $_POST['nonce_field_save_etfields'], 'action_save_etfields' ) ) {
+			if ( wp_verify_nonce( $_POST['nonce_field_save_custom_fields'], 'action_save_custom_fields' ) ) {
 
 				$custom_fields = [];
 
@@ -212,7 +209,7 @@ class Create_Fields {
 				if ( $custom_fields_flag ) {
 
 					if ( $_POST["in_reset_default"] == 1 ) {
-						update_option( 'opal_etfields_fields', [] );
+						update_option( 'opal_estate_custom_fields', [] );
 					} else {
 
 						if ( $custom_fields ) {
@@ -235,17 +232,12 @@ class Create_Fields {
 								} else {
 									unset( $custom_fields[ $custom_field_key ] );
 								}
-
-
 							}
 						}
-
-						update_option( 'opal_etfields_fields', $custom_fields );
+						update_option( 'opal_estate_custom_fields', $custom_fields );
 					}
-
-
 				} else {
-					delete_option( 'opal_etfields_fields' );
+					delete_option( 'opal_estate_custom_fields' );
 				}
 
 			}
@@ -256,32 +248,32 @@ class Create_Fields {
 
 	public function admin_page_display() {
 
-		wp_enqueue_style( "place-type", OPALETFIELDS_PLUGIN_URL . '/assets/admin/css/field-type.css' );
+		wp_enqueue_style( 'place-type', OPALESTATE_CUSTOM_FIELDS_PLUGIN_URL . '/assets/admin/css/field-type.css' );
 
-		wp_enqueue_style( "fonticonpicker", OPALETFIELDS_PLUGIN_URL . '/assets/fontIconPicker-2.0.0/css/jquery.fonticonpicker.min.css' );
-		wp_enqueue_style( "fonticonpicker-grey-theme", OPALETFIELDS_PLUGIN_URL . '/assets/fontIconPicker-2.0.0/themes/grey-theme/jquery.fonticonpicker.grey.min.css' );
-		wp_enqueue_style( "fontawesome", OPALETFIELDS_PLUGIN_URL . 'assets/font-awesome-4.6.3/css/font-awesome.css' );
+		wp_enqueue_style( 'fonticonpicker', OPALESTATE_CUSTOM_FIELDS_PLUGIN_URL . '/assets/fontIconPicker-2.0.0/css/jquery.fonticonpicker.min.css' );
+		wp_enqueue_style( 'fonticonpicker-grey-theme', OPALESTATE_CUSTOM_FIELDS_PLUGIN_URL . '/assets/fontIconPicker-2.0.0/themes/grey-theme/jquery.fonticonpicker.grey.min.css' );
+		wp_enqueue_style( 'fontawesome', OPALESTATE_CUSTOM_FIELDS_PLUGIN_URL . 'assets/font-awesome-4.6.3/css/font-awesome.css' );
 
-		wp_enqueue_script( "creatorfields", OPALETFIELDS_PLUGIN_URL . 'assets/js/fields.js', [ 'jquery' ], "1.3", false );
+		wp_enqueue_script( 'creatorfields', OPALESTATE_CUSTOM_FIELDS_PLUGIN_URL . 'assets/js/fields.js', [ 'jquery' ], '1.3', false );
 
-		wp_enqueue_script( "fonticonpicker", OPALETFIELDS_PLUGIN_URL . 'assets/fontIconPicker-2.0.0/jquery.fonticonpicker.min.js', [ 'jquery' ], "1.3", false );
+		wp_enqueue_script( 'fonticonpicker', OPALESTATE_CUSTOM_FIELDS_PLUGIN_URL . 'assets/fontIconPicker-2.0.0/jquery.fonticonpicker.min.js', [ 'jquery' ], "1.3", false );
 
 		wp_localize_script( 'creatorfields', 'myAjax', [ 'ajaxurl' => admin_url( 'admin-ajax.php' ) ] );
 
 		$data = [];
 
-		if ( class_exists( 'Opalestate_PostType_Property' ) ) {
-			$data = Opalestate_PostType_Property::metaboxes_info_fields();
+		if ( class_exists( '\Opalestate_Property_MetaBox' ) ) {
+			$data = \Opalestate_Property_MetaBox::metaboxes_info_fields();
 		}
 
-		$custom_fields = get_option( 'opal_etfields_fields' );
+		$custom_fields = get_option( 'opal_estate_custom_fields' );
 
 		if ( ! $custom_fields ) {
 
 			foreach ( $data as $key => $item ) {
 				if ( isset( $item['type'] ) ) {
 					if ( in_array( $item['type'], [ 'text', 'text_date', 'textarea', 'select', 'checkbox' ] ) ) {
-						$item['id']   = str_replace( OPALESTATE_PROPERTY_PREFIX, "", $item['id'] );
+						$item['id']   = str_replace( OPALESTATE_PROPERTY_PREFIX, '', $item['id'] );
 						$data[ $key ] = $item;
 					}
 				}
@@ -291,72 +283,63 @@ class Create_Fields {
 
 		?>
         <div class="etf-wappper">
-            <h1><?php _e( 'Creator fields', 'opal-estate-custom-fields' ) ?></h1>
+            <h1><?php _e( 'Custom fields', 'opal-estate-custom-fields' ) ?></h1>
 
             <form name="opal-etfields-form" action="" method="post">
 
                 <div class="opl-bootstrap">
                     <div class="listing-creator-custom-fields">
                         <div class="content-fields form-horizontal">
-
 							<?php
-
-							$Elements = new Elements();
+							$elements = new Elements();
 
 							if ( $custom_fields ) {
 								$index_select = 0;
 								foreach ( $custom_fields as $custom_field ) {
 									switch ( $custom_field['type'] ) {
 										case 'text':
-											$Elements->text( $custom_field );
+											$elements->text( $custom_field );
 											break;
 										case 'text_date' :
-											$Elements->text_date( $custom_field );
+											$elements->text_date( $custom_field );
 											break;
 										case 'textarea':
-											$Elements->textarea( $custom_field );
+											$elements->textarea( $custom_field );
 											break;
 										case 'select':
 											$custom_field['i'] = $index_select;
-											$Elements->select( $custom_field );
+											$elements->select( $custom_field );
 											$index_select++;
 											break;
 										case 'checkbox':
-											$Elements->checkbox( $custom_field );
+											$elements->checkbox( $custom_field );
 											break;
 										default:
 									}
 								}
 							}
 							?>
-
                         </div>
 
                         <div class="control-button">
-                            <span style="margin-right: 20px"><?php _e( 'Create new field', 'opal-estate-custom-fields' ) ?> : </span>
-                            <a href="#" data-type="text" class="create-et-field-btn button button-primary"><?php _e( 'Text', 'opal-estate-custom-fields' ) ?></a>
-                            <a href="#" data-type="text_date" class="create-et-field-btn button button-primary"><?php _e( 'Text date', 'opal-estate-custom-fields' ) ?></a>
-                            <a href="#" data-type="textarea" class="create-et-field-btn button button-primary"><?php _e( 'Textarea', 'opal-estate-custom-fields' ) ?></a>
-                            <a href="#" data-type="select" class="create-et-field-btn button button-primary"><?php _e( 'Select', 'opal-estate-custom-fields' ) ?></a>
-                            <a href="#" data-type="checkbox" class="create-et-field-btn button button-primary"><?php _e( 'Checkbox', 'opal-estate-custom-fields' ) ?></a>
+                            <span style="margin-right: 20px"><?php esc_html_e( 'Create new field', 'opal-estate-custom-fields' ) ?> : </span>
+                            <a href="#" data-type="text" class="create-et-field-btn button button-primary"><?php esc_html_e( 'Text', 'opal-estate-custom-fields' ) ?></a>
+                            <a href="#" data-type="text_date" class="create-et-field-btn button button-primary"><?php esc_html_e( 'Text date', 'opal-estate-custom-fields' ) ?></a>
+                            <a href="#" data-type="textarea" class="create-et-field-btn button button-primary"><?php esc_html_e( 'Textarea', 'opal-estate-custom-fields' ) ?></a>
+                            <a href="#" data-type="select" class="create-et-field-btn button button-primary"><?php esc_html_e( 'Select', 'opal-estate-custom-fields' ) ?></a>
+                            <a href="#" data-type="checkbox" class="create-et-field-btn button button-primary"><?php esc_html_e( 'Checkbox', 'opal-estate-custom-fields' ) ?></a>
                         </div>
 
-						<?php wp_nonce_field( 'action_save_etfields', 'nonce_field_save_etfields' ); ?>
+						<?php wp_nonce_field( 'action_save_custom_fields', 'nonce_field_save_custom_fields' ); ?>
 
                         <div class="submit-wrap">
-                            <input type="button" id="save-etfields" class="button button-primary" value="<?php _e( 'Save fields', 'opal-estate-custom-fields' ) ?>">
+                            <input type="button" id="save-etfields" class="button button-primary" value="<?php esc_html_e( 'Save fields', 'opal-estate-custom-fields' ) ?>">
                             <input type="hidden" name="in_reset_default" id="in-reset-default" value="0">
                         </div>
                     </div>
-
                 </div>
-
             </form>
-
-
         </div>
 		<?php
 	}
-
-
 }

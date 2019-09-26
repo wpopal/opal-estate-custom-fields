@@ -21,9 +21,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Opal Packages only works with WordPress 4.6 or later.
+ * Opal Packages only works with WordPress 4.9 or later.
  */
-if ( version_compare( $GLOBALS['wp_version'], '4.6', '<' ) ) {
+if ( version_compare( $GLOBALS['wp_version'], '4.9', '<' ) ) {
 	/**
 	 * Prints an update nag after an unsuccessful attempt to active
 	 * Opal Packages on WordPress versions prior to 4.6.
@@ -31,7 +31,7 @@ if ( version_compare( $GLOBALS['wp_version'], '4.6', '<' ) ) {
 	 * @global string $wp_version WordPress version.
 	 */
 	function opalestate_custom_fields_wordpress_upgrade_notice() {
-		$message = sprintf( esc_html__( 'Opal Packages requires at least WordPress version 4.6, you are running version %s. Please upgrade and try again!', 'opal-estate-custom-fields' ),
+		$message = sprintf( esc_html__( 'Opal Estate Custom Fields requires at least WordPress version 4.9, you are running version %s. Please upgrade and try again!', 'opal-estate-custom-fields' ),
 			$GLOBALS['wp_version'] );
 		printf( '<div class="error"><p>%s</p></div>', $message ); // WPCS: XSS OK.
 

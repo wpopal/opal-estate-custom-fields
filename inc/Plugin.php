@@ -1,6 +1,8 @@
 <?php
 namespace Opalestate_Custom_Fields;
 
+use Opalestate_Custom_Fields\Admin\Create_Fields;
+
 /**
  * Set up and initialize
  */
@@ -38,7 +40,7 @@ class Plugin {
 	 * Register admin.
 	 */
 	public function register_admin() {
-
+		new Create_Fields();
 	}
 
 	/**
