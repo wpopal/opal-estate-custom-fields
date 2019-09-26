@@ -1,9 +1,7 @@
 <?php
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+namespace Opalestate_Custom_Fields;
 
-class Opalestate_Override_Fields {
+class Handler {
 
 	public $meta = [];
 

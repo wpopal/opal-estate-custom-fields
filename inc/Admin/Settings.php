@@ -1,9 +1,7 @@
 <?php
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+namespace Opalestate_Custom_Fields;
 
-class Opalestate_Custom_Fields_Settings {
+class Settings {
 	/**
 	 * Opalestate_Custom_Fields_Settings constructor.
 	 */

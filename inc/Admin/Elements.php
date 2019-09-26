@@ -1,18 +1,13 @@
 <?php
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+namespace Opalestate_Custom_Fields;
 
-class OpalEtFieldCreator_Html_Elements {
+class Elements {
 
 	private $icon_data;
 
 
 	public function __construct() {
-
-		$icons = new OpalEtFieldCreator_Font_Awesome( OPALETFIELDS_PLUGIN_URL . 'assets/font-awesome-4.6.3/css/font-awesome.css' );
-
-		$this->icon_data = $icons->getIcons();
+	    $this->icon_data = [];
 	}
 
 
