@@ -392,7 +392,3 @@ class Handler {
 	}
 
 }
-
-$Opalestate_Override_Fields = new Opalestate_Override_Fields();
-
-

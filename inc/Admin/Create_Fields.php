@@ -1,12 +1,11 @@
 <?php
-namespace Opalestate_Custom_Fields;
+namespace Opalestate_Custom_Fields\Admin;
 
 class Create_Fields {
 	/**
 	 * Create_Fields constructor.
 	 */
 	public function __construct() {
-
 		add_action( 'admin_menu', [ $this, 'admin_menu' ], 10 );
 
 		add_action( 'wp_ajax_creator_custom_type', [ $this, 'creator_custom_type' ] );
@@ -15,12 +14,12 @@ class Create_Fields {
 		add_action( 'wp_ajax_create_option_select', [ $this, 'create_option_select' ] );
 		add_action( 'wp_ajax_nopriv_create_option_select', [ $this, 'create_option_select' ] );
 
-		add_action( "admin_init", [ $this, 'save_data' ] );
+		add_action( 'admin_init', [ $this, 'save_data' ] );
 	}
 
 
 	public function admin_menu() {
-		add_submenu_page( 'edit.php?post_type=opalestate_property', __( 'Fields creator', 'opal-et-field-creator' ), __( 'Fields creator', 'opal-et-field-creator' ),
+		add_submenu_page( 'edit.php?post_type=opalestate_property', __( 'Custom Fields', 'opal-estate-custom-fields' ), __( 'Fields creator', 'opal-estate-custom-fields' ),
 			'manage_opalestate_settings', 'opal-create-fields',
 			[ $this, 'admin_page_display' ] );
 	}
@@ -36,10 +35,10 @@ class Create_Fields {
 				'option_index'    => $_POST['option_index'],
 			];
 
-			$OpalEtFieldCreator_Html_Elements = new OpalEtFieldCreator_Html_Elements();
+			$Elements = new Elements();
 
 			ob_start();
-			$OpalEtFieldCreator_Html_Elements->select_option( $args );
+			$Elements->select_option( $args );
 			$html = ob_get_contents();
 			ob_end_clean();
 
@@ -57,26 +56,26 @@ class Create_Fields {
 
 		$type = $_POST['type'];
 
-		$OpalEtFieldCreator_Html_Elements = new OpalEtFieldCreator_Html_Elements();
+		$Elements = new Elements();
 
 		ob_start();
 
 		switch ( $type ) {
 			case "textarea":
-				$OpalEtFieldCreator_Html_Elements->textarea();
+				$Elements->textarea();
 				break;
 			case "select":
-				$OpalEtFieldCreator_Html_Elements->select();
+				$Elements->select();
 				break;
 			case "checkbox";
-				$OpalEtFieldCreator_Html_Elements->checkbox();
+				$Elements->checkbox();
 				break;
 			case "text_date":
-				$OpalEtFieldCreator_Html_Elements->text_date();
+				$Elements->text_date();
 				break;
 			case "text":
 			default:
-				$OpalEtFieldCreator_Html_Elements->text();
+				$Elements->text();
 				break;
 		}
 
@@ -292,7 +291,7 @@ class Create_Fields {
 
 		?>
         <div class="etf-wappper">
-            <h1><?php _e( 'Creator fields', 'opal-et-field-creator' ) ?></h1>
+            <h1><?php _e( 'Creator fields', 'opal-estate-custom-fields' ) ?></h1>
 
             <form name="opal-etfields-form" action="" method="post">
 
@@ -302,28 +301,28 @@ class Create_Fields {
 
 							<?php
 
-							$OpalEtFieldCreator_Html_Elements = new OpalEtFieldCreator_Html_Elements();
+							$Elements = new Elements();
 
 							if ( $custom_fields ) {
 								$index_select = 0;
 								foreach ( $custom_fields as $custom_field ) {
 									switch ( $custom_field['type'] ) {
 										case 'text':
-											$OpalEtFieldCreator_Html_Elements->text( $custom_field );
+											$Elements->text( $custom_field );
 											break;
 										case 'text_date' :
-											$OpalEtFieldCreator_Html_Elements->text_date( $custom_field );
+											$Elements->text_date( $custom_field );
 											break;
 										case 'textarea':
-											$OpalEtFieldCreator_Html_Elements->textarea( $custom_field );
+											$Elements->textarea( $custom_field );
 											break;
 										case 'select':
 											$custom_field['i'] = $index_select;
-											$OpalEtFieldCreator_Html_Elements->select( $custom_field );
+											$Elements->select( $custom_field );
 											$index_select++;
 											break;
 										case 'checkbox':
-											$OpalEtFieldCreator_Html_Elements->checkbox( $custom_field );
+											$Elements->checkbox( $custom_field );
 											break;
 										default:
 									}
@@ -334,18 +333,18 @@ class Create_Fields {
                         </div>
 
                         <div class="control-button">
-                            <span style="margin-right: 20px"><?php _e( 'Create new field', 'opal-et-field-creator' ) ?> : </span>
-                            <a href="#" data-type="text" class="create-et-field-btn button button-primary"><?php _e( 'Text', 'opal-et-field-creator' ) ?></a>
-                            <a href="#" data-type="text_date" class="create-et-field-btn button button-primary"><?php _e( 'Text date', 'opal-et-field-creator' ) ?></a>
-                            <a href="#" data-type="textarea" class="create-et-field-btn button button-primary"><?php _e( 'Textarea', 'opal-et-field-creator' ) ?></a>
-                            <a href="#" data-type="select" class="create-et-field-btn button button-primary"><?php _e( 'Select', 'opal-et-field-creator' ) ?></a>
-                            <a href="#" data-type="checkbox" class="create-et-field-btn button button-primary"><?php _e( 'Checkbox', 'opal-et-field-creator' ) ?></a>
+                            <span style="margin-right: 20px"><?php _e( 'Create new field', 'opal-estate-custom-fields' ) ?> : </span>
+                            <a href="#" data-type="text" class="create-et-field-btn button button-primary"><?php _e( 'Text', 'opal-estate-custom-fields' ) ?></a>
+                            <a href="#" data-type="text_date" class="create-et-field-btn button button-primary"><?php _e( 'Text date', 'opal-estate-custom-fields' ) ?></a>
+                            <a href="#" data-type="textarea" class="create-et-field-btn button button-primary"><?php _e( 'Textarea', 'opal-estate-custom-fields' ) ?></a>
+                            <a href="#" data-type="select" class="create-et-field-btn button button-primary"><?php _e( 'Select', 'opal-estate-custom-fields' ) ?></a>
+                            <a href="#" data-type="checkbox" class="create-et-field-btn button button-primary"><?php _e( 'Checkbox', 'opal-estate-custom-fields' ) ?></a>
                         </div>
 
 						<?php wp_nonce_field( 'action_save_etfields', 'nonce_field_save_etfields' ); ?>
 
                         <div class="submit-wrap">
-                            <input type="button" id="save-etfields" class="button button-primary" value="<?php _e( 'Save fields', 'opal-et-field-creator' ) ?>">
+                            <input type="button" id="save-etfields" class="button button-primary" value="<?php _e( 'Save fields', 'opal-estate-custom-fields' ) ?>">
                             <input type="hidden" name="in_reset_default" id="in-reset-default" value="0">
                         </div>
                     </div>
@@ -361,7 +360,3 @@ class Create_Fields {
 
 
 }
-
-$OpalEtFieldCreator_Create_Fields = new OpalEtFieldCreator_Create_Fields();
-
-

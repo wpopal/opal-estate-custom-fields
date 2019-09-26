@@ -1,5 +1,5 @@
 <?php
-namespace Opalestate_Custom_Fields;
+namespace Opalestate_Custom_Fields\Admin;
 
 class Settings {
 	/**
@@ -155,5 +155,3 @@ class Settings {
 	}
 
 }
-
-$Opalestate_Custom_Fields_Settings = new Opalestate_Custom_Fields_Settings();

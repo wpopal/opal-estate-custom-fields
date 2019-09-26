@@ -1,5 +1,5 @@
 <?php
-namespace Opalestate_Custom_Fields;
+namespace Opalestate_Custom_Fields\Admin;
 
 class Elements {
 
