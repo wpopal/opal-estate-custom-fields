@@ -1,26 +1,39 @@
 <?php
 namespace Opalestate_Custom_Fields\Admin;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 class Elements {
+	/**
+	 * @var
+	 */
+	public $icon_data;
 
-	private $icon_data;
-
-
+	/**
+	 * Elements constructor.
+	 */
 	public function __construct() {
-	    $this->icon_data = [];
+		// $icons           = new Fontawesome();
+		// $this->icon_data = $icons->get_icons();
+		$this->icon_data = [];
 	}
 
-
+	/**
+	 * Build text field.
+	 *
+	 * @param array $args
+	 */
 	public function text( $args = [] ) {
 		$default = [
 			'name'        => '',
 			'id'          => '',
 			'description' => '',
 			'default'     => '',
-			'icon_data'   => $this->icon_data,
-			'unit'        => '',
+			'placeholder' => '',
+			'required'    => '',
 			'icon'        => '',
-			'icon_class'  => '',
 		];
 
 		$args = array_merge( $default, $args );
@@ -28,96 +41,48 @@ class Elements {
 		extract( $args );
 
 		?>
-        <div class="panel-group">
+        <li class="panel-group">
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a class="toggle-panel">
-							<?php _e( 'TextField', 'opal-et-field-creator' ) ?> : <?php echo $name ?></a>
-                        <a href="#" class="remove-custom-field-item">x</a>
+                        <a class="toggle-panel"><i class="dashicons dashicons-edit"></i><?php esc_html_e( 'Text', 'opaljob' ); ?>: <span><?php echo esc_html( $name ); ?></span></a>
+                        <a href="#" class="remove-custom-field-item"><i class="dashicons dashicons-no"></i></a>
                     </h4>
-
                 </div>
                 <div class="panel-body" style="display: none">
-                    <div class="form-group-field">
-                        <label class="control-label label-field"><?php _e( 'Metakey', 'opal-et-field-creator' ) ?></label>
-                        <div class="content-field">
-                            <input type="text" name="id[]" class="form-control etf-in" placeholder="<?php _e( 'Please Enter Meta Key', 'opal-et-field-creator' ); ?>" value="<?php echo $id ?>">
-                            <p>
-                                <i><?php _e( 'Please enter word not contain blank, special characters. This field is used for search able, it should be lowercase or _ for example: your_key_here' ); ?></i>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="form-group-field">
-                        <label class="control-label label-field"><?php _e( 'Title', 'opal-et-field-creator' ) ?></label>
-                        <div class="content-field">
-                            <input type="text" name="name[]" class="form-control etf-in" placeholder="<?php _e( 'Please Enter Title', 'opal-et-field-creator' ); ?>" value="<?php echo $name; ?>">
-                        </div>
-                    </div>
-                    <div class="form-group-field">
-                        <label class="control-label label-field"><?php _e( 'Description', 'opal-et-field-creator' ) ?></label>
-                        <div class="content-field">
-                            <textarea name="description[]" class="etf-textarea" placeholder="<?php _e( 'Please Enter Description', 'opal-et-field-creator' ); ?>"><?php echo $description; ?></textarea>
-                        </div>
-                    </div>
-                    <div class="form-group-field">
-                        <label class="control-label label-field"><?php _e( 'Default', 'opal-et-field-creator' ) ?></label>
-                        <div class="content-field">
-                            <input type="text" name="default[]" class="form-control etf-in" placeholder="<?php _e( 'Please Enter Default', 'opal-et-field-creator' ); ?>"
-                                   value="<?php echo $default ?>">
-                        </div>
-                    </div>
+					<?php $this->render_metakey( $id ); ?>
 
-                    <div class="form-group-field">
-                        <label class="control-label label-field"><?php _e( 'Unit', 'opal-et-field-creator' ) ?></label>
-                        <div class="content-field">
-                            <input type="text" name="unit[]" class="form-control etf-in" placeholder="<?php _e( 'Please Enter Unit', 'opal-et-field-creator' ); ?>" value="<?php echo $unit ?>">
-                        </div>
-                    </div>
+					<?php $this->render_title( $name ); ?>
 
-                    <div class="form-group-field">
-                        <label class="control-label label-field"><?php _e( 'Icon Class', 'opal-et-field-creator' ) ?></label>
-                        <div class="content-field">
-                            <input type="text" name="icon_class[]" class="form-control etf-in" placeholder="<?php _e( 'Please Enter Icon Class', 'opal-et-field-creator' ); ?>"
-                                   value="<?php echo $icon_class; ?>">
-                        </div>
-                    </div>
+					<?php $this->render_placeholder( $placeholder ); ?>
 
-                    <div class="form-group-field">
-                        <label class="control-label label-field"><?php _e( 'Icon', 'opal-et-field-creator' ) ?></label>
-                        <div class="content-field">
+					<?php $this->render_description( $description ); ?>
 
-                            <select class="fa-icon-picker" name="icon[]">
-                                <option value=""></option>
-								<?php
-								foreach ( $icon_data as $icon_item ) { ?>
-                                    <option <?php echo ( $icon == "fa " . $icon_item["class"] ) ? 'selected="selected"' : ""; ?>
-                                            value="fa <?php echo $icon_item['class'] ?>"><?php echo $icon_item['class'] ?></option>
-									<?php
-								}
-								?>
-                            </select>
-                        </div>
-                    </div>
+					<?php $this->render_default( $default ); ?>
+
+					<?php $this->render_required( $required ); ?>
+
+					<?php $this->render_icon( $icon ); ?>
                 </div>
             </div>
             <input type="hidden" name="type[]" value="text"/>
-        </div>
+        </li>
 		<?php
 	}
 
-
+	/**
+	 * Build textarea.
+	 *
+	 * @param array $args
+	 */
 	public function textarea( $args = [] ) {
-
 		$default = [
 			'name'        => '',
 			'id'          => '',
 			'description' => '',
 			'default'     => '',
-			'icon_data'   => $this->icon_data,
-			'unit'        => '',
+			'required'    => '',
 			'icon'        => '',
-			'icon_class'  => '',
 		];
 
 		$args = array_merge( $default, $args );
@@ -125,94 +90,47 @@ class Elements {
 		extract( $args );
 
 		?>
-        <div class="panel-group">
+        <li class="panel-group">
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a class="toggle-panel"><?php _e( 'TextArea', 'opal-et-field-creator' ) ?> : <?php echo $name ?></a>
-                        <a href="#" class="remove-custom-field-item">x</a>
+                        <a class="toggle-panel"><i class="dashicons dashicons-editor-alignleft"></i><?php esc_html_e( 'Textarea', 'opaljob' ); ?>: <span><?php echo esc_html( $name ); ?></span></a>
+                        <a href="#" class="remove-custom-field-item"><i class="dashicons dashicons-no"></i></a>
                     </h4>
-
                 </div>
                 <div class="panel-body" style="display: none">
-                    <div class="form-group-field">
-                        <label class="control-label label-field"><?php echo _e( 'Metakey', 'opal-et-field-creator' ) ?></label>
-                        <div class="content-field">
-                            <input type="text" name="id[]" class="form-control etf-in" placeholder="<?php echo _e( 'Please Enter Meta Key', 'opal-et-field-creator' ) ?>" value="<?php echo $id ?>">
-                            <p>
-                                <i><?php _e( 'Please enter word not contain blank, special characters. This field is used for search able, it should be lowercase or _ for example: your_key_here' ); ?></i>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="form-group-field">
-                        <label class="control-label label-field"><?php _e( 'Title', 'opal-et-field-creator' ) ?></label>
-                        <div class="content-field">
-                            <input type="text" name="name[]" class="form-control etf-in" placeholder="<?php echo _e( 'Please Enter Title', 'opal-et-field-creator' ) ?>" value="<?php echo $name ?>">
-                        </div>
-                    </div>
-                    <div class="form-group-field">
-                        <label class="control-label label-field"><?php _e( 'Description', 'opal-et-field-creator' ) ?></label>
-                        <div class="content-field">
-                            <textarea name="description[]" class="etf-textarea"
-                                      placeholder="<?php echo _e( 'Please Enter Description', 'opal-et-field-creator' ) ?>"><?php echo $description ?></textarea>
-                        </div>
-                    </div>
-                    <div class="form-group-field">
-                        <label class="control-label label-field"><?php _e( 'Default', 'opal-et-field-creator' ) ?></label>
-                        <div class="content-field">
-                            <input type="text" name="default[]" class="form-control etf-in" placeholder="<?php echo _e( 'Please Enter Default', 'opal-et-field-creator' ) ?>"
-                                   value="<?php echo $default ?>">
-                        </div>
-                    </div>
+					<?php $this->render_metakey( $id ); ?>
 
-                    <div class="form-group-field">
-                        <label class="control-label label-field"><?php _e( 'Unit', 'opal-et-field-creator' ) ?></label>
-                        <div class="content-field">
-                            <input type="text" name="unit[]" class="form-control etf-in" placeholder="<?php _e( 'Please Enter Unit', 'opal-et-field-creator' ); ?>" value="<?php echo $unit ?>">
-                        </div>
-                    </div>
+					<?php $this->render_title( $name ); ?>
 
-                    <div class="form-group-field">
-                        <label class="control-label label-field"><?php _e( 'Icon Class', 'opal-et-field-creator' ) ?></label>
-                        <div class="content-field">
-                            <input type="text" name="icon_class[]" class="form-control etf-in" placeholder="<?php _e( 'Please Enter Icon Class', 'opal-et-field-creator' ); ?>"
-                                   value="<?php echo $icon_class; ?>">
-                        </div>
-                    </div>
-                    <div class="form-group-field">
-                        <label class="control-label label-field"><?php _e( 'Icon', 'opal-et-field-creator' ) ?></label>
-                        <div class="content-field">
-                            <select class="fa-icon-picker" name="icon[]">
-                                <option value=""></option>
-								<?php
-								foreach ( $icon_data as $icon_item ) { ?>
-                                    <option <?php echo ( $icon == "fa " . $icon_item["class"] ) ? 'selected="selected"' : ""; ?>
-                                            value="fa <?php echo $icon_item['class'] ?>"><?php echo $icon_item['class'] ?></option>
-									<?php
-								}
-								?>
-                            </select>
-                        </div>
-                    </div>
+					<?php $this->render_description( $description ); ?>
+
+					<?php $this->render_default( $default ); ?>
+
+					<?php $this->render_required( $required ); ?>
+
+					<?php $this->render_icon( $icon ); ?>
                 </div>
             </div>
             <input type="hidden" name="type[]" value="textarea"/>
-        </div>
+        </li>
 		<?php
 	}
 
-
-	public function text_date( $args = [] ) {
-
+	/**
+	 * Build text date.
+	 *
+	 * @param array $args
+	 */
+	public function date( $args = [] ) {
 		$default = [
 			'name'        => '',
 			'id'          => '',
 			'description' => '',
 			'default'     => '',
-			'icon_data'   => $this->icon_data,
-			'unit'        => '',
+			'placeholder' => '',
+			'required'    => '',
 			'icon'        => '',
-			'icon_class'  => '',
 		];
 
 		$args = array_merge( $default, $args );
@@ -220,143 +138,52 @@ class Elements {
 		extract( $args );
 
 		?>
-        <div class="panel-group">
+        <li class="panel-group">
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a class="toggle-panel">
-							<?php _e( 'TextDate', 'opal-et-field-creator' ) ?> : <?php echo $name ?></a>
-                        <a href="#" class="remove-custom-field-item">x</a>
+                        <a class="toggle-panel"><i class="dashicons dashicons-calendar-alt"></i><?php esc_html_e( 'Date', 'opaljob' ); ?>: <span><?php echo esc_html( $name ); ?></span></a>
+                        <a href="#" class="remove-custom-field-item"><i class="dashicons dashicons-no"></i></a>
                     </h4>
 
                 </div>
                 <div class="panel-body" style="display: none">
-                    <div class="form-group-field">
-                        <label class="control-label label-field"><?php _e( 'Metakey', 'opal-et-field-creator' ) ?></label>
-                        <div class="content-field">
-                            <input type="text" name="id[]" class="form-control etf-in" placeholder="<?php _e( 'Please Enter Meta Key', 'opal-et-field-creator' ) ?>" value="<?php echo $id ?>">
-                            <p>
-                                <i><?php _e( 'Please enter word not contain blank, special characters. This field is used for search able, it should be lowercase or _ for example: your_key_here' ); ?></i>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="form-group-field">
-                        <label class="control-label label-field"><?php _e( 'Title', 'opal-et-field-creator' ) ?></label>
-                        <div class="content-field">
-                            <input type="text" name="name[]" class="form-control etf-in" placeholder="<?php _e( 'Please Enter Title', 'opal-et-field-creator' ) ?>" value="<?php echo $name; ?>">
-                        </div>
-                    </div>
-                    <div class="form-group-field">
-                        <label class="control-label label-field"><?php _e( 'Description', 'opal-et-field-creator' ) ?></label>
-                        <div class="content-field">
-                            <textarea name="description[]" class="etf-textarea" placeholder="<?php _e( 'Please Enter Description', 'opal-et-field-creator' ) ?>"><?php echo $description; ?></textarea>
-                        </div>
-                    </div>
-                    <div class="form-group-field">
-                        <label class="control-label label-field"><?php _e( 'Default', 'opal-et-field-creator' ) ?></label>
-                        <div class="content-field">
-                            <input type="text" name="default[]" class="form-control etf-in" placeholder="<?php _e( 'Please Enter Default', 'opal-et-field-creator' ) ?>" value="<?php echo $default ?>">
-                            <p><i><?php _e( 'Please enter format mm/dd/yyyy' ); ?></i></p>
-                        </div>
-                    </div>
+					<?php $this->render_metakey( $id ); ?>
 
-                    <div class="form-group-field">
-                        <label class="control-label label-field"><?php _e( 'Unit', 'opal-et-field-creator' ) ?></label>
-                        <div class="content-field">
-                            <input type="text" name="unit[]" class="form-control etf-in" placeholder="<?php _e( 'Please Enter Unit', 'opal-et-field-creator' ); ?>" value="<?php echo $unit ?>">
-                        </div>
-                    </div>
+					<?php $this->render_title( $name ); ?>
 
-                    <div class="form-group-field">
-                        <label class="control-label label-field"><?php _e( 'Icon Class', 'opal-et-field-creator' ) ?></label>
-                        <div class="content-field">
-                            <input type="text" name="icon_class[]" class="form-control etf-in" placeholder="<?php _e( 'Please Enter Icon Class', 'opal-et-field-creator' ); ?>"
-                                   value="<?php echo $icon_class; ?>">
-                        </div>
-                    </div>
-                    <div class="form-group-field">
-                        <label class="control-label label-field"><?php _e( 'Icon', 'opal-et-field-creator' ) ?></label>
-                        <div class="content-field">
+					<?php $this->render_placeholder( $placeholder ); ?>
 
-                            <select class="fa-icon-picker" name="icon[]">
-                                <option value=""></option>
-								<?php
-								foreach ( $icon_data as $icon_item ) { ?>
-                                    <option <?php echo ( $icon == "fa " . $icon_item["class"] ) ? 'selected="selected"' : ""; ?>
-                                            value="fa <?php echo $icon_item['class'] ?>"><?php echo $icon_item['class'] ?></option>
-									<?php
-								}
-								?>
-                            </select>
-                        </div>
-                    </div>
+					<?php $this->render_description( $description ); ?>
+
+					<?php $this->render_default( $default ); ?>
+
+					<?php $this->render_required( $required ); ?>
+
+					<?php $this->render_icon( $icon ); ?>
                 </div>
             </div>
-            <input type="hidden" name="type[]" value="text_date"/>
-        </div>
+            <input type="hidden" name="type[]" value="date"/>
+        </li>
 		<?php
-
-
 	}
 
-
-	public function select_option( $args = [] ) {
-
-		$default = [
-			'index'           => 0,
-			'checked_default' => '',
-			'option_index'    => 0,
-		];
-
-		$args = array_merge( $default, $args );
-
-		extract( $args );
-
-		?>
-        <div class="row option-row">
-            <div class="label-wrap">
-                <div>
-                    <strong><?php _e( 'Label', 'opal-et-field-creator' ) ?></strong>
-                </div>
-                <div class="option-row-val"><input type="text" name="opal_custom_select_options_label[<?php echo $index ?>][]" class="opallisting-options-label form-control" value=""/></div>
-            </div>
-
-            <div class="value-wrap">
-                <div>
-                    <strong><?php _e( 'Value', 'opal-et-field-creator' ) ?></strong>
-                </div>
-                <div class="option-row-val"><input type="text" name="opal_custom_select_options_value[<?php echo $index ?>][]" class="opallisting-options-value form-control" value=""/></div>
-            </div>
-            <div class="col-lg-3 col-md-3 default-wrap">
-                <div>
-                    <strong><?php _e( 'Default', 'opal-et-field-creator' ) ?></strong>
-                </div>
-                <div class="option-row-val"><input type="radio" class="opallisting-options-default" <?php echo $checked_default ?> name="opal_custom_select_options_default[<?php echo $index ?>]"
-                                                   value="<?php echo $option_index ?>"></div>
-            </div>
-            <div class="col-lg-1 col-md-1 remove-wrap">
-                <a href="#" class="opallisting-remove-option">x</a>
-            </div>
-        </div>
-		<?php
-
-	}
-
-
+	/**
+	 * Build select.
+	 *
+	 * @param array $args
+	 */
 	public function select( $args = [] ) {
-
 		$default = [
 			'name'        => '',
 			'id'          => '',
 			'description' => '',
 			'default'     => '',
-			'icon_data'   => $this->icon_data,
-			'unit'        => '',
-			'icon'        => '',
-			'icon_class'  => '',
 			'i'           => 0,
 			'options'     => [],
 			'multiple'    => 0,
+			'required'    => '',
+			'icon'        => '',
 		];
 
 		$args = array_merge( $default, $args );
@@ -364,48 +191,21 @@ class Elements {
 		extract( $args );
 
 		?>
-        <div class="panel-group select-container">
+        <li class="panel-group select-container">
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a class="toggle-panel">
-							<?php _e( 'Select', 'opal-et-field-creator' ) ?> : <?php echo $name ?></a>
-                        <a href="#" class="remove-custom-field-item">x</a>
+                        <a class="toggle-panel"><i class="dashicons dashicons-menu"></i><?php esc_html_e( 'Select', 'opaljob' ); ?>: <span><?php echo esc_html( $name ); ?></span></a>
+                        <a href="#" class="remove-custom-field-item"><i class="dashicons dashicons-no"></i></a>
                     </h4>
-
                 </div>
                 <div class="panel-body" style="display: none">
-                    <div class="form-group-field">
-                        <label class="control-label label-field"><?php _e( 'Metakey', 'opal-et-field-creator' ) ?></label>
-                        <div class="content-field">
-                            <input type="text" name="id[]" class="form-control etf-in" placeholder="<?php _e( 'Please Enter Meta Key', 'opal-et-field-creator' ) ?>" value="<?php echo $id ?>">
-                            <p>
-                                <i><?php _e( 'Please enter word not contain blank, special characters. This field is used for search able, it should be lowercase or _ for example: your_key_here' ); ?></i>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="form-group-field">
-                        <label class="control-label label-field"><?php _e( 'Title', 'opal-et-field-creator' ) ?></label>
-                        <div class="content-field">
-                            <input type="text" name="name[]" class="form-control etf-in" placeholder="<?php _e( 'Please Enter Title', 'opal-et-field-creator' ) ?>" value="<?php echo $name; ?>">
-                        </div>
-                    </div>
-                    <div class="form-group-field">
-                        <label class="control-label label-field"><?php _e( 'Description', 'opal-et-field-creator' ) ?></label>
-                        <div class="content-field">
-                            <textarea name="description[]" class="etf-textarea" placeholder="<?php _e( 'Please Enter Description', 'opal-et-field-creator' ) ?>"><?php echo $description; ?></textarea>
-                        </div>
-                    </div>
+					<?php $this->render_metakey( $id ); ?>
+
+					<?php $this->render_title( $name ); ?>
 
                     <div class="form-group-field">
-                        <label class="control-label label-field"><?php _e( 'Multiple', 'opal-et-field-creator' ) ?></label>
-                        <div class="content-field">
-                            <input type="checkbox" name="multiple[<?php echo $i ?>]" class="form-control multiple" value="1" <?php echo $multiple ? "checked" : "" ?> />
-                        </div>
-                    </div>
-
-                    <div class="form-group-field">
-                        <label class="control-label label-field"><?php _e( 'Options', 'opal-et-field-creator' ) ?></label>
+                        <label class="control-label label-field"><?php esc_html_e( 'Options', 'opaljob' ); ?></label>
                         <div class="content-field options-container">
 
 							<?php
@@ -419,101 +219,71 @@ class Elements {
 								?>
                                 <div class="row option-row">
                                     <div class="label-wrap">
-                                        <div>
-                                            <strong><?php _e( 'Label', 'opal-et-field-creator' ) ?></strong>
-                                        </div>
-                                        <div class="option-row-val">
-                                            <input type="text" name="opal_custom_select_options_label[<?php echo $i ?>][]" class="opallisting-options-label form-control"
-                                                   value="<?php echo $option_item ?>"/>
-                                        </div>
-
+                                        <label>
+                                            <strong><?php esc_html_e( 'Label', 'opaljob' ); ?></strong>
+                                            <input type="text" name="select_options_label[<?php echo esc_attr( $i ); ?>][]" class="options-label form-control"
+                                                   value="<?php echo esc_attr( $option_item ); ?>"/>
+                                        </label>
                                     </div>
                                     <div class="value-wrap">
-                                        <div>
-                                            <strong><?php _e( 'Value', 'opal-et-field-creator' ) ?></strong>
-                                        </div>
-                                        <div class="option-row-val">
-                                            <input type="text" name="opal_custom_select_options_value[<?php echo $i ?>][]" class="opallisting-options-value form-control"
-                                                   value="<?php echo $option_item_key; ?>"/>
-                                        </div>
+                                        <label>
+                                            <strong><?php esc_html_e( 'Value', 'opaljob' ); ?></strong>
+                                            <input type="text" name="select_options_value[<?php echo esc_attr( $i ); ?>][]" class="options-value form-control"
+                                                   value="<?php echo esc_attr( $option_item_key ); ?>"/>
+                                        </label>
 
                                     </div>
-                                    <div class="col-lg-3 col-md-3 default-wrap">
-                                        <div>
-                                            <strong><?php _e( 'Default', 'opal-et-field-creator' ) ?></strong>
-                                        </div>
-                                        <div class="option-row-val">
-                                            <input type="radio" class="opallisting-options-default" name="opal_custom_select_options_default[<?php echo $i ?>]" <?php echo $checked ? 'checked' : ''; ?>
-                                                   value="<?php echo $index ?>">
-                                        </div>
+                                    <div class="default-wrap">
+                                        <label>
+                                            <strong><?php esc_html_e( 'Default', 'opaljob' ); ?></strong>
+                                            <input type="radio" name="select_options_default[<?php echo esc_attr( $i ); ?>]" class="options-default" <?php echo esc_attr(
+												$checked ) ? 'checked' : ''; ?> value="<?php echo esc_attr( $index ); ?>">
+                                        </label>
 
                                     </div>
-                                    <div class="col-lg-1 col-md-1 remove-wrap">
-                                        <a href="#" class="opallisting-remove-option">x</a>
+                                    <div class="remove-wrap">
+                                        <a href="#" class="form-builder-remove-option"><i class="dashicons dashicons-no"></i></a>
                                     </div>
                                 </div>
-
 								<?php
 								$index++;
 							}
 							?>
 
-                            <a href="#" class="btn btn-info add-new-options"><?php _e( 'Add New Item', 'opal-et-field-creator' ) ?></a>
+                            <a href="#" class="btn button button-secondary add-new-options"><?php esc_html_e( 'Add new option', 'opaljob' ); ?></a>
                         </div>
                     </div>
 
+					<?php $this->render_description( $description ); ?>
+
                     <div class="form-group-field">
-                        <label class="control-label label-field"><?php _e( 'Unit', 'opal-et-field-creator' ) ?></label>
+                        <label class="control-label label-field"><?php esc_html_e( 'Multiple', 'opaljob' ); ?></label>
                         <div class="content-field">
-                            <input type="text" name="unit[]" class="form-control etf-in" placeholder="<?php _e( 'Please Enter Unit', 'opal-et-field-creator' ); ?>" value="<?php echo $unit ?>">
+                            <input type="checkbox" name="multiple[<?php echo esc_attr( $i ); ?>]" class="form-control multiple" value="1" <?php echo esc_attr( $multiple ) ? "checked" : "" ?> />
                         </div>
                     </div>
 
-                    <div class="form-group-field">
-                        <label class="control-label label-field"><?php _e( 'Icon Class', 'opal-et-field-creator' ) ?></label>
-                        <div class="content-field">
-                            <input type="text" name="icon_class[]" class="form-control etf-in" placeholder="<?php _e( 'Please Enter Icon Class', 'opal-et-field-creator' ); ?>"
-                                   value="<?php echo $icon_class; ?>">
-                        </div>
-                    </div>
-                    <div class="form-group-field">
-                        <label class="control-label label-field"><?php _e( 'Icon', 'opal-et-field-creator' ) ?></label>
-                        <div class="content-field">
-                            <select class="fa-icon-picker" name="icon[]">
-                                <option value=""></option>
-								<?php
-								foreach ( $icon_data as $icon_item ) { ?>
-                                    <option <?php echo ( $icon == "fa " . $icon_item["class"] ) ? 'selected="selected"' : ""; ?>
-                                            value="fa <?php echo $icon_item['class'] ?>"><?php echo $icon_item['class'] ?></option>
-									<?php
-								}
-								?>
-                            </select>
-                        </div>
-                    </div>
+					<?php $this->render_required( $required ); ?>
 
+					<?php $this->render_icon( $icon ); ?>
                 </div>
             </div>
             <input type="hidden" name="type[]" value="select"/>
-            <input type="hidden" name="select_id[]" class="opallisting-select-index" value="<?php echo $i; ?>"/>
-        </div>
+            <input type="hidden" name="select_id[]" class="select-index" value="<?php echo esc_attr( $i ); ?>"/>
+        </li>
 		<?php
-
-
 	}
 
-
-	public function checkbox( $args = [] ) {
-
+	/**
+	 * Build select option.
+	 *
+	 * @param array $args
+	 */
+	public function select_option( $args = [] ) {
 		$default = [
-			'name'        => '',
-			'id'          => '',
-			'description' => '',
-			'default'     => '',
-			'icon_data'   => $this->icon_data,
-			'unit'        => '',
-			'icon'        => '',
-			'icon_class'  => '',
+			'index'           => 0,
+			'checked_default' => '',
+			'option_index'    => 0,
 		];
 
 		$args = array_merge( $default, $args );
@@ -521,78 +291,217 @@ class Elements {
 		extract( $args );
 
 		?>
-        <div class="panel-group">
+        <div class="row option-row">
+            <div class="label-wrap">
+                <label>
+                    <strong><?php esc_html_e( 'Label', 'opaljob' ); ?></strong>
+                    <input type="text" name="select_options_label[<?php echo esc_attr( $index ); ?>][]" class="options-label form-control" value=""/>
+                </label>
+            </div>
+
+            <div class="value-wrap">
+                <label>
+                    <strong><?php esc_html_e( 'Value', 'opaljob' ); ?></strong>
+                    <input type="text" name="select_options_value[<?php echo esc_attr( $index ); ?>][]" class="options-value form-control" value=""/>
+                </label>
+            </div>
+            <div class="default-wrap">
+                <label>
+                    <strong><?php esc_html_e( 'Default', 'opaljob' ); ?></strong>
+                    <input type="radio" name="select_options_default[<?php echo esc_attr( $index ); ?>]" class="options-default" <?php echo esc_attr( $checked_default ); ?>
+                           value="<?php echo esc_attr( $option_index ); ?>">
+                </label>
+            </div>
+            <div class="remove-wrap">
+                <a href="#" class="form-builder-remove-option"><i class="dashicons dashicons-no"></i></a>
+            </div>
+        </div>
+		<?php
+	}
+
+	/**
+	 * Build checkbox.
+	 *
+	 * @param array $args
+	 */
+	public function checkbox( $args = [] ) {
+		$default = [
+			'name'        => '',
+			'id'          => '',
+			'description' => '',
+			'default'     => '',
+			'required'    => '',
+			'icon'        => '',
+		];
+
+		$args = array_merge( $default, $args );
+
+		extract( $args );
+
+		?>
+        <li class="panel-group">
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a class="toggle-panel"><?php _e( 'Checkbox', 'opal-et-field-creator' ) ?> : <?php echo $name ?></a>
-                        <a href="#" class="remove-custom-field-item">x</a>
+                        <a class="toggle-panel"><i class="dashicons dashicons-yes-alt"></i><?php esc_html_e( 'Checkbox', 'opaljob' ); ?>: <span><?php echo esc_html( $name ); ?></span></a>
+                        <a href="#" class="remove-custom-field-item"><i class="dashicons dashicons-no"></i></a>
                     </h4>
-
                 </div>
                 <div class="panel-body" style="display: none">
-                    <div class="form-group-field">
-                        <label class="control-label label-field"><?php _e( 'Metakey', 'opal-et-field-creator' ) ?></label>
-                        <div class="content-field">
-                            <input type="text" name="id[]" class="form-control etf-in" placeholder="<?php _e( 'Please Enter Meta Key', 'opal-et-field-creator' ) ?>" value="<?php echo $id ?>">
-                            <p>
-                                <i><?php _e( 'Please enter word not contain blank, special characters. This field is used for search able, it should be lowercase or _ for example: your_key_here' ); ?></i>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="form-group-field">
-                        <label class="control-label label-field"><?php _e( 'Title', 'opal-et-field-creator' ) ?></label>
-                        <div class="content-field">
-                            <input type="text" name="name[]" class="form-control etf-in" placeholder="<?php _e( 'Please Enter Title', 'opal-et-field-creator' ) ?>" value="<?php echo $name; ?>">
-                        </div>
-                    </div>
-                    <div class="form-group-field">
-                        <label class="control-label label-field"><?php _e( 'Description', 'opal-et-field-creator' ) ?></label>
-                        <div class="content-field">
-                            <textarea name="description[]" class="etf-textarea" placeholder="<?php _e( 'Please Enter Description', 'opal-et-field-creator' ) ?>"><?php echo $description ?></textarea>
-                        </div>
-                    </div>
-                    <div class="form-group-field">
-                        <label class="control-label label-field"><?php _e( 'Check by default', 'opal-et-field-creator' ) ?></label>
-                        <div class="content-field">
-                            <input type="checkbox" name="default[]" class="form-control etf-in" <?php echo $default ? "checked" : ""; ?>
-                                   placeholder="<?php _e( 'Please Enter Default', 'opal-et-field-creator' ) ?>" value="1">
-                        </div>
-                    </div>
+					<?php $this->render_metakey( $id ); ?>
+
+					<?php $this->render_title( $name ); ?>
+
+					<?php $this->render_description( $description ); ?>
 
                     <div class="form-group-field">
-                        <label class="control-label label-field"><?php _e( 'Unit', 'opal-et-field-creator' ) ?></label>
+                        <label class="control-label label-field"><?php esc_html_e( 'Default', 'opaljob' ); ?></label>
                         <div class="content-field">
-                            <input type="text" name="unit[]" class="form-control etf-in" placeholder="<?php _e( 'Please Enter Unit', 'opal-et-field-creator' ); ?>" value="<?php echo $unit ?>">
-                        </div>
-                    </div>
-
-                    <div class="form-group-field">
-                        <label class="control-label label-field"><?php _e( 'Icon Class', 'opal-et-field-creator' ) ?></label>
-                        <div class="content-field">
-                            <input type="text" name="icon_class[]" class="form-control etf-in" placeholder="<?php _e( 'Please Enter Icon Class', 'opal-et-field-creator' ); ?>"
-                                   value="<?php echo $icon_class; ?>">
-                        </div>
-                    </div>
-                    <div class="form-group-field">
-                        <label class="control-label label-field"><?php _e( 'Icon', 'opal-et-field-creator' ) ?></label>
-                        <div class="content-field">
-                            <select class="fa-icon-picker" name="icon[]">
-                                <option value=""></option>
-								<?php
-								foreach ( $icon_data as $icon_item ) { ?>
-                                    <option <?php echo ( $icon == "fa " . $icon_item["class"] ) ? 'selected="selected"' : ""; ?>
-                                            value="fa <?php echo $icon_item['class'] ?>"><?php echo $icon_item['class'] ?></option>
-									<?php
-								}
-								?>
+                            <select name="default[]" class="form-control etf-in">
+                                <option value="off" <?php selected( $default, 'off' ); ?>><?php esc_html_e( 'Off', 'opaljob' ); ?></option>
+                                <option value="on" <?php selected( $default, 'on' ); ?>><?php esc_html_e( 'On', 'opaljob' ); ?></option>
                             </select>
-
                         </div>
                     </div>
+
+					<?php $this->render_required( $required ); ?>
+
+					<?php $this->render_icon( $icon ); ?>
                 </div>
             </div>
             <input type="hidden" name="type[]" value="checkbox"/>
+        </li>
+		<?php
+	}
+
+	/**
+	 * Render meta key.
+	 *
+	 * @param $value
+	 */
+	protected function render_metakey( $value ) {
+		?>
+        <div class="form-group-field">
+            <label class="control-label label-field"><?php esc_html_e( 'Meta key', 'opaljob' ); ?><span class="required"> *</span></label>
+            <div class="content-field">
+                <input type="text" name="id[]" class="form-control input-meta-key etf-in" placeholder="<?php esc_html_e( 'Please Enter Meta Key', 'opaljob' ); ?>" value="<?php echo esc_attr( $value
+				); ?>" required="required">
+                <p class="content-field__description">
+					<?php esc_html_e( 'Please enter word not contain blank, special characters. This field is used for search able, it should be lowercase or _ for example: your_key_here.' ); ?>
+                </p>
+            </div>
+        </div>
+		<?php
+	}
+
+	/**
+	 * Render title.
+	 *
+	 * @param $value
+	 */
+	protected function render_title( $value ) {
+		?>
+        <div class="form-group-field">
+            <label class="control-label label-field"><?php esc_html_e( 'Title', 'opaljob' ); ?><span class="required"> *</span></label>
+            <div class="content-field">
+                <input type="text" name="name[]" class="form-control input-title etf-in" placeholder="<?php esc_attr_e( 'Please enter title.', 'opaljob' ); ?>" value="<?php echo esc_attr( $value
+				); ?>" required="required">
+            </div>
+        </div>
+		<?php
+	}
+
+	/**
+	 * Render placeholder.
+	 *
+	 * @param $value
+	 */
+	protected function render_placeholder( $value ) {
+		?>
+        <div class="form-group-field">
+            <label class="control-label label-field"><?php esc_html_e( 'Placeholder', 'opaljob' ); ?></label>
+            <div class="content-field">
+                <input type="text" name="placeholder[]" class="form-control input-placeholder etf-in" placeholder="<?php esc_attr_e( 'Please enter placeholder.', 'opaljob' ); ?>" value="<?php echo
+				esc_attr( $value ); ?>">
+            </div>
+        </div>
+		<?php
+	}
+
+	/**
+	 * Render description.
+	 *
+	 * @param $value
+	 */
+	protected function render_description( $value ) {
+		?>
+        <div class="form-group-field">
+            <label class="control-label label-field"><?php esc_html_e( 'Description', 'opaljob' ); ?></label>
+            <div class="content-field">
+                <textarea name="description[]" class="input-description etf-textarea" placeholder="<?php esc_attr_e( 'Please enter description', 'opaljob' ); ?>"><?php echo esc_html( $value );
+	                ?></textarea>
+            </div>
+        </div>
+		<?php
+	}
+
+	/**
+	 * Render default.
+	 *
+	 * @param $value
+	 */
+	protected function render_default( $value ) {
+		?>
+        <div class="form-group-field">
+            <label class="control-label label-field"><?php esc_html_e( 'Default', 'opaljob' ); ?></label>
+            <div class="content-field">
+                <input type="text" name="default[]" class="form-control input-default etf-in" placeholder="<?php esc_attr_e( 'Please enter default', 'opaljob' ); ?>" value="<?php echo esc_attr(
+					$value );
+				?>">
+            </div>
+        </div>
+		<?php
+	}
+
+	/**
+	 * Render required.
+	 *
+	 * @param $value
+	 */
+	protected function render_required( $value ) {
+		?>
+        <div class="form-group-field">
+            <label class="control-label label-field"><?php esc_html_e( 'Required', 'opaljob' ); ?></label>
+            <div class="content-field">
+                <select name="required[]" class="form-control etf-in">
+                    <option value="" <?php selected( $value, '' ); ?>><?php esc_html_e( 'No', 'opaljob' ); ?></option>
+                    <option value="yes" <?php selected( $value, 'yes' ); ?>><?php esc_html_e( 'Yes', 'opaljob' ); ?></option>
+                </select>
+            </div>
+        </div>
+		<?php
+	}
+
+	/**
+	 * Render required.
+	 *
+	 * @param $value
+	 */
+	protected function render_icon( $value ) {
+		wp_enqueue_script( 'fonticonpicker' );
+		?>
+        <div class="form-group-field">
+            <label class="control-label label-field"><?php esc_html_e( 'Icon', 'opaljob' ); ?></label>
+            <div class="content-field">
+                <select name="icon[]" class="opaljob-iconpicker form-control etf-in">
+					<?php
+					foreach ( $this->icon_data as $icon_item ) {
+						$full_icon_class = $icon_item['prefix'] . ' ' . $icon_item['class'];
+						echo '<option value="' . $full_icon_class . '" ' . selected( $full_icon_class, $value, false ) . '>' . esc_html( $icon_item['class'] ) . '</option>';
+					}
+					?>
+                </select>
+            </div>
         </div>
 		<?php
 	}
