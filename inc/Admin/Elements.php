@@ -15,9 +15,11 @@ class Elements {
 	 * Elements constructor.
 	 */
 	public function __construct() {
-		// $icons           = new Fontawesome();
-		// $this->icon_data = $icons->get_icons();
 		$this->icon_data = [];
+		if ( class_exists( 'Opalestate_Iconpicker_Fontawesome' ) ) {
+			$icons           = new \Opalestate_Iconpicker_Fontawesome();
+			$this->icon_data = $icons->get_icons();
+		}
 	}
 
 	/**
@@ -45,7 +47,7 @@ class Elements {
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a class="toggle-panel"><i class="dashicons dashicons-edit"></i><?php esc_html_e( 'Text', 'opaljob' ); ?>: <span><?php echo esc_html( $name ); ?></span></a>
+                        <a class="toggle-panel"><i class="dashicons dashicons-edit"></i><?php esc_html_e( 'Text', 'opal-estate-custom-fields' ); ?>: <span><?php echo esc_html( $name ); ?></span></a>
                         <a href="#" class="remove-custom-field-item"><i class="dashicons dashicons-no"></i></a>
                     </h4>
                 </div>
@@ -94,7 +96,7 @@ class Elements {
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a class="toggle-panel"><i class="dashicons dashicons-editor-alignleft"></i><?php esc_html_e( 'Textarea', 'opaljob' ); ?>: <span><?php echo esc_html( $name ); ?></span></a>
+                        <a class="toggle-panel"><i class="dashicons dashicons-editor-alignleft"></i><?php esc_html_e( 'Textarea', 'opal-estate-custom-fields' ); ?>: <span><?php echo esc_html( $name ); ?></span></a>
                         <a href="#" class="remove-custom-field-item"><i class="dashicons dashicons-no"></i></a>
                     </h4>
                 </div>
@@ -142,7 +144,7 @@ class Elements {
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a class="toggle-panel"><i class="dashicons dashicons-calendar-alt"></i><?php esc_html_e( 'Date', 'opaljob' ); ?>: <span><?php echo esc_html( $name ); ?></span></a>
+                        <a class="toggle-panel"><i class="dashicons dashicons-calendar-alt"></i><?php esc_html_e( 'Date', 'opal-estate-custom-fields' ); ?>: <span><?php echo esc_html( $name ); ?></span></a>
                         <a href="#" class="remove-custom-field-item"><i class="dashicons dashicons-no"></i></a>
                     </h4>
 
@@ -195,7 +197,7 @@ class Elements {
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a class="toggle-panel"><i class="dashicons dashicons-menu"></i><?php esc_html_e( 'Select', 'opaljob' ); ?>: <span><?php echo esc_html( $name ); ?></span></a>
+                        <a class="toggle-panel"><i class="dashicons dashicons-menu"></i><?php esc_html_e( 'Select', 'opal-estate-custom-fields' ); ?>: <span><?php echo esc_html( $name ); ?></span></a>
                         <a href="#" class="remove-custom-field-item"><i class="dashicons dashicons-no"></i></a>
                     </h4>
                 </div>
@@ -205,7 +207,7 @@ class Elements {
 					<?php $this->render_title( $name ); ?>
 
                     <div class="form-group-field">
-                        <label class="control-label label-field"><?php esc_html_e( 'Options', 'opaljob' ); ?></label>
+                        <label class="control-label label-field"><?php esc_html_e( 'Options', 'opal-estate-custom-fields' ); ?></label>
                         <div class="content-field options-container">
 
 							<?php
@@ -220,14 +222,14 @@ class Elements {
                                 <div class="row option-row">
                                     <div class="label-wrap">
                                         <label>
-                                            <strong><?php esc_html_e( 'Label', 'opaljob' ); ?></strong>
+                                            <strong><?php esc_html_e( 'Label', 'opal-estate-custom-fields' ); ?></strong>
                                             <input type="text" name="select_options_label[<?php echo esc_attr( $i ); ?>][]" class="options-label form-control"
                                                    value="<?php echo esc_attr( $option_item ); ?>"/>
                                         </label>
                                     </div>
                                     <div class="value-wrap">
                                         <label>
-                                            <strong><?php esc_html_e( 'Value', 'opaljob' ); ?></strong>
+                                            <strong><?php esc_html_e( 'Value', 'opal-estate-custom-fields' ); ?></strong>
                                             <input type="text" name="select_options_value[<?php echo esc_attr( $i ); ?>][]" class="options-value form-control"
                                                    value="<?php echo esc_attr( $option_item_key ); ?>"/>
                                         </label>
@@ -235,7 +237,7 @@ class Elements {
                                     </div>
                                     <div class="default-wrap">
                                         <label>
-                                            <strong><?php esc_html_e( 'Default', 'opaljob' ); ?></strong>
+                                            <strong><?php esc_html_e( 'Default', 'opal-estate-custom-fields' ); ?></strong>
                                             <input type="radio" name="select_options_default[<?php echo esc_attr( $i ); ?>]" class="options-default" <?php echo esc_attr(
 												$checked ) ? 'checked' : ''; ?> value="<?php echo esc_attr( $index ); ?>">
                                         </label>
@@ -250,14 +252,14 @@ class Elements {
 							}
 							?>
 
-                            <a href="#" class="btn button button-secondary add-new-options"><?php esc_html_e( 'Add new option', 'opaljob' ); ?></a>
+                            <a href="#" class="btn button button-secondary add-new-options"><?php esc_html_e( 'Add new option', 'opal-estate-custom-fields' ); ?></a>
                         </div>
                     </div>
 
 					<?php $this->render_description( $description ); ?>
 
                     <div class="form-group-field">
-                        <label class="control-label label-field"><?php esc_html_e( 'Multiple', 'opaljob' ); ?></label>
+                        <label class="control-label label-field"><?php esc_html_e( 'Multiple', 'opal-estate-custom-fields' ); ?></label>
                         <div class="content-field">
                             <input type="checkbox" name="multiple[<?php echo esc_attr( $i ); ?>]" class="form-control multiple" value="1" <?php echo esc_attr( $multiple ) ? "checked" : "" ?> />
                         </div>
@@ -294,20 +296,20 @@ class Elements {
         <div class="row option-row">
             <div class="label-wrap">
                 <label>
-                    <strong><?php esc_html_e( 'Label', 'opaljob' ); ?></strong>
+                    <strong><?php esc_html_e( 'Label', 'opal-estate-custom-fields' ); ?></strong>
                     <input type="text" name="select_options_label[<?php echo esc_attr( $index ); ?>][]" class="options-label form-control" value=""/>
                 </label>
             </div>
 
             <div class="value-wrap">
                 <label>
-                    <strong><?php esc_html_e( 'Value', 'opaljob' ); ?></strong>
+                    <strong><?php esc_html_e( 'Value', 'opal-estate-custom-fields' ); ?></strong>
                     <input type="text" name="select_options_value[<?php echo esc_attr( $index ); ?>][]" class="options-value form-control" value=""/>
                 </label>
             </div>
             <div class="default-wrap">
                 <label>
-                    <strong><?php esc_html_e( 'Default', 'opaljob' ); ?></strong>
+                    <strong><?php esc_html_e( 'Default', 'opal-estate-custom-fields' ); ?></strong>
                     <input type="radio" name="select_options_default[<?php echo esc_attr( $index ); ?>]" class="options-default" <?php echo esc_attr( $checked_default ); ?>
                            value="<?php echo esc_attr( $option_index ); ?>">
                 </label>
@@ -343,7 +345,7 @@ class Elements {
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a class="toggle-panel"><i class="dashicons dashicons-yes-alt"></i><?php esc_html_e( 'Checkbox', 'opaljob' ); ?>: <span><?php echo esc_html( $name ); ?></span></a>
+                        <a class="toggle-panel"><i class="dashicons dashicons-yes-alt"></i><?php esc_html_e( 'Checkbox', 'opal-estate-custom-fields' ); ?>: <span><?php echo esc_html( $name ); ?></span></a>
                         <a href="#" class="remove-custom-field-item"><i class="dashicons dashicons-no"></i></a>
                     </h4>
                 </div>
@@ -355,11 +357,11 @@ class Elements {
 					<?php $this->render_description( $description ); ?>
 
                     <div class="form-group-field">
-                        <label class="control-label label-field"><?php esc_html_e( 'Default', 'opaljob' ); ?></label>
+                        <label class="control-label label-field"><?php esc_html_e( 'Default', 'opal-estate-custom-fields' ); ?></label>
                         <div class="content-field">
                             <select name="default[]" class="form-control etf-in">
-                                <option value="off" <?php selected( $default, 'off' ); ?>><?php esc_html_e( 'Off', 'opaljob' ); ?></option>
-                                <option value="on" <?php selected( $default, 'on' ); ?>><?php esc_html_e( 'On', 'opaljob' ); ?></option>
+                                <option value="off" <?php selected( $default, 'off' ); ?>><?php esc_html_e( 'Off', 'opal-estate-custom-fields' ); ?></option>
+                                <option value="on" <?php selected( $default, 'on' ); ?>><?php esc_html_e( 'On', 'opal-estate-custom-fields' ); ?></option>
                             </select>
                         </div>
                     </div>
@@ -382,9 +384,9 @@ class Elements {
 	protected function render_metakey( $value ) {
 		?>
         <div class="form-group-field">
-            <label class="control-label label-field"><?php esc_html_e( 'Meta key', 'opaljob' ); ?><span class="required"> *</span></label>
+            <label class="control-label label-field"><?php esc_html_e( 'Meta key', 'opal-estate-custom-fields' ); ?><span class="required"> *</span></label>
             <div class="content-field">
-                <input type="text" name="id[]" class="form-control input-meta-key etf-in" placeholder="<?php esc_html_e( 'Please Enter Meta Key', 'opaljob' ); ?>" value="<?php echo esc_attr( $value
+                <input type="text" name="id[]" class="form-control input-meta-key etf-in" placeholder="<?php esc_html_e( 'Please Enter Meta Key', 'opal-estate-custom-fields' ); ?>" value="<?php echo esc_attr( $value
 				); ?>" required="required">
                 <p class="content-field__description">
 					<?php esc_html_e( 'Please enter word not contain blank, special characters. This field is used for search able, it should be lowercase or _ for example: your_key_here.' ); ?>
@@ -402,9 +404,9 @@ class Elements {
 	protected function render_title( $value ) {
 		?>
         <div class="form-group-field">
-            <label class="control-label label-field"><?php esc_html_e( 'Title', 'opaljob' ); ?><span class="required"> *</span></label>
+            <label class="control-label label-field"><?php esc_html_e( 'Title', 'opal-estate-custom-fields' ); ?><span class="required"> *</span></label>
             <div class="content-field">
-                <input type="text" name="name[]" class="form-control input-title etf-in" placeholder="<?php esc_attr_e( 'Please enter title.', 'opaljob' ); ?>" value="<?php echo esc_attr( $value
+                <input type="text" name="name[]" class="form-control input-title etf-in" placeholder="<?php esc_attr_e( 'Please enter title.', 'opal-estate-custom-fields' ); ?>" value="<?php echo esc_attr( $value
 				); ?>" required="required">
             </div>
         </div>
@@ -419,9 +421,9 @@ class Elements {
 	protected function render_placeholder( $value ) {
 		?>
         <div class="form-group-field">
-            <label class="control-label label-field"><?php esc_html_e( 'Placeholder', 'opaljob' ); ?></label>
+            <label class="control-label label-field"><?php esc_html_e( 'Placeholder', 'opal-estate-custom-fields' ); ?></label>
             <div class="content-field">
-                <input type="text" name="placeholder[]" class="form-control input-placeholder etf-in" placeholder="<?php esc_attr_e( 'Please enter placeholder.', 'opaljob' ); ?>" value="<?php echo
+                <input type="text" name="placeholder[]" class="form-control input-placeholder etf-in" placeholder="<?php esc_attr_e( 'Please enter placeholder.', 'opal-estate-custom-fields' ); ?>" value="<?php echo
 				esc_attr( $value ); ?>">
             </div>
         </div>
@@ -436,9 +438,9 @@ class Elements {
 	protected function render_description( $value ) {
 		?>
         <div class="form-group-field">
-            <label class="control-label label-field"><?php esc_html_e( 'Description', 'opaljob' ); ?></label>
+            <label class="control-label label-field"><?php esc_html_e( 'Description', 'opal-estate-custom-fields' ); ?></label>
             <div class="content-field">
-                <textarea name="description[]" class="input-description etf-textarea" placeholder="<?php esc_attr_e( 'Please enter description', 'opaljob' ); ?>"><?php echo esc_html( $value );
+                <textarea name="description[]" class="input-description etf-textarea" placeholder="<?php esc_attr_e( 'Please enter description', 'opal-estate-custom-fields' ); ?>"><?php echo esc_html( $value );
 	                ?></textarea>
             </div>
         </div>
@@ -453,9 +455,9 @@ class Elements {
 	protected function render_default( $value ) {
 		?>
         <div class="form-group-field">
-            <label class="control-label label-field"><?php esc_html_e( 'Default', 'opaljob' ); ?></label>
+            <label class="control-label label-field"><?php esc_html_e( 'Default', 'opal-estate-custom-fields' ); ?></label>
             <div class="content-field">
-                <input type="text" name="default[]" class="form-control input-default etf-in" placeholder="<?php esc_attr_e( 'Please enter default', 'opaljob' ); ?>" value="<?php echo esc_attr(
+                <input type="text" name="default[]" class="form-control input-default etf-in" placeholder="<?php esc_attr_e( 'Please enter default', 'opal-estate-custom-fields' ); ?>" value="<?php echo esc_attr(
 					$value );
 				?>">
             </div>
@@ -471,11 +473,11 @@ class Elements {
 	protected function render_required( $value ) {
 		?>
         <div class="form-group-field">
-            <label class="control-label label-field"><?php esc_html_e( 'Required', 'opaljob' ); ?></label>
+            <label class="control-label label-field"><?php esc_html_e( 'Required', 'opal-estate-custom-fields' ); ?></label>
             <div class="content-field">
                 <select name="required[]" class="form-control etf-in">
-                    <option value="" <?php selected( $value, '' ); ?>><?php esc_html_e( 'No', 'opaljob' ); ?></option>
-                    <option value="yes" <?php selected( $value, 'yes' ); ?>><?php esc_html_e( 'Yes', 'opaljob' ); ?></option>
+                    <option value="" <?php selected( $value, '' ); ?>><?php esc_html_e( 'No', 'opal-estate-custom-fields' ); ?></option>
+                    <option value="yes" <?php selected( $value, 'yes' ); ?>><?php esc_html_e( 'Yes', 'opal-estate-custom-fields' ); ?></option>
                 </select>
             </div>
         </div>
@@ -488,12 +490,13 @@ class Elements {
 	 * @param $value
 	 */
 	protected function render_icon( $value ) {
-		wp_enqueue_script( 'fonticonpicker' );
+		// wp_enqueue_script( 'fonticonpicker' );
+
 		?>
         <div class="form-group-field">
-            <label class="control-label label-field"><?php esc_html_e( 'Icon', 'opaljob' ); ?></label>
+            <label class="control-label label-field"><?php esc_html_e( 'Icon', 'opal-estate-custom-fields' ); ?></label>
             <div class="content-field">
-                <select name="icon[]" class="opaljob-iconpicker form-control etf-in">
+                <select name="icon[]" class="opalestate-iconpicker form-control etf-in">
 					<?php
 					foreach ( $this->icon_data as $icon_item ) {
 						$full_icon_class = $icon_item['prefix'] . ' ' . $icon_item['class'];

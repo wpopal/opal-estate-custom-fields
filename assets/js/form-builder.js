@@ -1,7 +1,7 @@
 jQuery( document ).ready( function ( $ ) {
-    var etfields_container = $( '.listing-creator-custom-fields .content-fields' );
+    var custom_fields_container = $( '.listing-creator-custom-fields .content-fields' );
 
-    etfields_container.on( 'click', '.form-builder-remove-option', function ( e ) {
+    custom_fields_container.on( 'click', '.form-builder-remove-option', function ( e ) {
         e.preventDefault();
         var remove_element_container = $( this ).closest( '.options-container' );
         $( this ).closest( '.option-row' ).remove();
@@ -11,12 +11,12 @@ jQuery( document ).ready( function ( $ ) {
         } );
     } );
 
-    if ( etfields_container.length ) {
-        etfields_container.sortable( { cursor: 'move' } ).disableSelection();
+    if ( custom_fields_container.length ) {
+        custom_fields_container.sortable( { cursor: 'move' } ).disableSelection();
     }
 
     function form_key_change() {
-        etfields_container.find( '.input-title' ).on( 'input', function () {
+        custom_fields_container.find( '.input-title' ).on( 'input', function () {
             var $el = $( this );
             var $title = $el.closest( '.panel-group' ).find( '.toggle-panel span' );
             $title.html( $el.val() );
@@ -25,16 +25,16 @@ jQuery( document ).ready( function ( $ ) {
 
     form_key_change();
 
-    etfields_container.find( '.opaljob-iconpicker' ).each( function () {
+    custom_fields_container.find( '.opalestate-iconpicker' ).each( function () {
         $( this ).fontIconPicker();
     } );
 
-    etfields_container.on( 'click', '.panel-title', function ( e ) {
+    custom_fields_container.on( 'click', '.panel-title', function ( e ) {
         e.preventDefault();
         $( this ).closest( '.panel-group' ).find( '.panel-body' ).slideToggle();
     } );
 
-    etfields_container.on( 'click', '.remove-custom-field-item', function ( e ) {
+    custom_fields_container.on( 'click', '.remove-custom-field-item', function ( e ) {
         e.preventDefault();
         $( this ).closest( '.panel-group' ).remove();
 
@@ -63,8 +63,8 @@ jQuery( document ).ready( function ( $ ) {
 
     $( '.reset-button' ).on( 'click', function ( e ) {
         e.preventDefault();
-        if ( confirm( opaljobFormBuilder.text.confirm_reset_text ) == true ) {
-            etfields_container.find( '.panel-group' ).remove();
+        if ( confirm( opalestateCTF.text.confirm_reset_text ) == true ) {
+            custom_fields_container.find( '.panel-group' ).remove();
         }
     } );
 
@@ -87,23 +87,23 @@ jQuery( document ).ready( function ( $ ) {
                 if ( response.type == 'success' ) {
                     if ( type_field == 'select' ) {
                         var index_select = $( 'input.select-index' ).length;
-                        etfields_container.append( response.html );
+                        custom_fields_container.append( response.html );
                         $( '.select-container:last' ).find( 'input.select-index' ).val( index_select );
                         $( '.select-container:last' )
                             .find( 'input.multiple' )
                             .attr( 'name', 'multiple[' + index_select + ']' );
                     } else {
-                        etfields_container.append( response.html );
+                        custom_fields_container.append( response.html );
                     }
                     form_key_change();
                 } else {
-                    alert( opaljobFormBuilder.text.try_again );
+                    alert( opalestateCTF.text.try_again );
                 }
             }
         } );
     } );
 
-    etfields_container.on( 'click', '.add-new-options', function ( e ) {
+    custom_fields_container.on( 'click', '.add-new-options', function ( e ) {
         e.preventDefault();
 
         var option_container = $( this ).closest( '.select-container' ).find( '.options-container' );
@@ -134,7 +134,7 @@ jQuery( document ).ready( function ( $ ) {
                     var option_html = response.html;
                     $( option_html ).insertBefore( add_new_option );
                 } else {
-                    alert( opaljobFormBuilder.text.try_again );
+                    alert( opalestateCTF.text.try_again );
                 }
             }
         } );
@@ -215,13 +215,13 @@ jQuery( document ).ready( function ( $ ) {
 
                     if ( !input_element.closest( '.panel-body' ).find( 'p.error-message' ).length ) {
                         input_element.after(
-                            '<p class="form-builder-error-message">' + opaljobFormBuilder.text.duplicate_meta_key +
+                            '<p class="form-builder-error-message">' + opalestateCTF.text.duplicate_meta_key +
                             ' <strong>' + input_element.val() +
                             '</strong></p>' );
                     } else {
                         input_element.closest( '.panel-body' ).find( 'p.error-message' ).remove();
                         input_element.after(
-                            '<p class="form-builder-error-message">' + opaljobFormBuilder.text.duplicate_meta_key +
+                            '<p class="form-builder-error-message">' + opalestateCTF.text.duplicate_meta_key +
                             ' <strong> ' + input_element.val() +
                             '</strong></p>' );
                     }

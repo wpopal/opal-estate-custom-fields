@@ -68,7 +68,7 @@ class Admin {
 	 */
 	public function render_page() {
 		echo '<div class="opaljob-settings-page">';
-		echo '<p class="opaljob-settings-page-desc">' . esc_html__( 'Property builder using for show', 'opaljob' ) . '</p>';
+		echo '<p class="opaljob-settings-page-desc">' . esc_html__( 'Property builder using for show', 'opal-estate-custom-fields' ) . '</p>';
 
 		$form = new Create_Fields( 'opal_estate_custom_fields' );
 		$form->render();

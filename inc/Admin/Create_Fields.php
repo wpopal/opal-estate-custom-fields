@@ -19,9 +19,9 @@ class Create_Fields {
 	}
 
 	public function save() {
-		if ( isset( $_POST['nonce_field_save_form_builder'] ) ) {
+		if ( isset( $_POST['nonce_field_save_custom_fields'] ) ) {
 
-			if ( wp_verify_nonce( $_POST['nonce_field_save_form_builder'], 'action_save_form_builder' ) ) {
+			if ( wp_verify_nonce( $_POST['nonce_field_save_custom_fields'], 'action_save_custom_fields' ) ) {
 				$custom_fields      = [];
 				$custom_fields_flag = false;
 				if ( isset( $_POST['type'] ) ) {
@@ -167,13 +167,21 @@ class Create_Fields {
 	 * Render form builder.
 	 */
 	public function render() {
-		wp_enqueue_style( 'opaljob-form-builder', OPALESTATE_CUSTOM_FIELDS_PLUGIN_URL . 'assets/css/form-builder.css', [], '1.0' );
-		wp_enqueue_script( 'opaljob-form-builder', OPALESTATE_CUSTOM_FIELDS_PLUGIN_URL . 'assets/js/form-builder.js', [ 'jquery' ], '1.0', false );
-		wp_localize_script( 'opaljob-form-builder', 'opaljobFormBuilder', [
+		wp_enqueue_script( 'fonticonpicker', OPALESTATE_CUSTOM_FIELDS_PLUGIN_URL . 'assets/js/jquery.fonticonpicker.min.js', [], '2.0.0' );
+		wp_enqueue_style( 'opalestate-custom-fields', OPALESTATE_CUSTOM_FIELDS_PLUGIN_URL . 'assets/css/form-builder.css', [], '1.0' );
+		wp_enqueue_script( 'opalestate-custom-fields', OPALESTATE_CUSTOM_FIELDS_PLUGIN_URL . 'assets/js/form-builder.js', [ 'jquery' ], '1.0', false );
+		wp_enqueue_style( 'hint', OPALESTATE_CUSTOM_FIELDS_PLUGIN_URL . 'assets/css/hint.min.css', null, '1.3', false );
+		// Iconpicker.
+		wp_register_style( 'fonticonpicker', OPALESTATE_CUSTOM_FIELDS_PLUGIN_URL . 'assets/css/jquery.fonticonpicker.min.css', [], '2.0.0' );
+		wp_register_style( 'fonticonpicker-grey-theme', OPALESTATE_CUSTOM_FIELDS_PLUGIN_URL . 'assets/themes/grey-theme/jquery.fonticonpicker.grey.min.css', [ 'fontawesome' ], '2.0.0' );
+
+		wp_enqueue_style( 'fonticonpicker' );
+		wp_enqueue_style( 'fonticonpicker-grey-theme' );
+		wp_localize_script( 'opalestate-custom-fields', 'opalestateCTF', [
 			'text' => [
-				'confirm_reset_text' => esc_html__( 'Are you sure reset fields?', 'opaljob' ),
-				'duplicate_meta_key' => esc_html__( 'Duplicate meta key', 'opaljob' ),
-				'try_again'          => esc_html__( 'Please try again!', 'opaljob' ),
+				'confirm_reset_text' => esc_html__( 'Are you sure reset fields?', 'opal-estate-custom-fields' ),
+				'duplicate_meta_key' => esc_html__( 'Duplicate meta key', 'opal-estate-custom-fields' ),
+				'try_again'          => esc_html__( 'Please try again!', 'opal-estate-custom-fields' ),
 			],
 		] );
 
@@ -199,7 +207,7 @@ class Create_Fields {
                 <div class="listing-creator-custom-fields">
 
                     <div class="control-button">
-                        <span style="margin-right: 20px"><?php esc_html_e( 'Add new field', 'opaljob' ) ?>: </span>
+                        <span style="margin-right: 20px"><?php esc_html_e( 'Add new field', 'opal-estate-custom-fields' ) ?>: </span>
 						<?php $field_supports = $this->get_field_supports(); ?>
 						<?php foreach ( $field_supports as $field ) : ?>
                             <a href="#" data-type="<?php echo esc_attr( $field['type'] ); ?>" class="create-et-field-btn hint--top" aria-label="<?php echo esc_attr( $field['title'] ); ?>"
@@ -240,23 +248,23 @@ class Create_Fields {
 										break;
 								}
 
-								do_action( 'opaljob_form_builder_render_field', $custom_field, $elements );
+								do_action( 'opalestate_custom_fields_render_field', $custom_field, $elements );
 							}
 						}
 						?>
 
                     </ul>
 
-					<?php wp_nonce_field( 'action_save_form_builder', 'nonce_field_save_form_builder' ); ?>
+					<?php wp_nonce_field( 'action_save_custom_fields', 'nonce_field_save_custom_fields' ); ?>
 
                     <div class="submit-wrap">
                         <input type="hidden" name="option_key" id="option_key" value="<?php echo esc_attr( $this->option_key ); ?>">
                         <button class="save-button btn btn-submit button button-primary" id="save-etfields" name="save_page_options" value="savedata" type="submit">
-							<?php esc_html_e( 'Save', 'opaljob' ); ?>
+							<?php esc_html_e( 'Save', 'opal-estate-custom-fields' ); ?>
                         </button>
 
                         <button class="reset-button btn btn-submit button button-secondary" id="reset-etfields" name="reset_page_options" value="savedata" type="button">
-							<?php esc_html_e( 'Reset', 'opaljob' ); ?>
+							<?php esc_html_e( 'Reset', 'opal-estate-custom-fields' ); ?>
                         </button>
                         <input type="hidden" name="in_reset_default" id="in-reset-default" value="0">
                     </div>
@@ -270,30 +278,30 @@ class Create_Fields {
 	 * Gets field supports.
 	 */
 	public function get_field_supports() {
-		return apply_filters( 'opaljob_form_builder_field_supports', [
+		return apply_filters( 'opalestate_custom_fields_field_supports', [
 			[
 				'type'  => 'text',
-				'title' => esc_html__( 'Text', 'opaljob' ),
+				'title' => esc_html__( 'Text', 'opal-estate-custom-fields' ),
 				'icon'  => 'dashicons dashicons-edit',
 			],
 			[
 				'type'  => 'textarea',
-				'title' => esc_html__( 'Text area', 'opaljob' ),
+				'title' => esc_html__( 'Text area', 'opal-estate-custom-fields' ),
 				'icon'  => 'dashicons dashicons-editor-alignleft',
 			],
 			[
 				'type'  => 'select',
-				'title' => esc_html__( 'Select', 'opaljob' ),
+				'title' => esc_html__( 'Select', 'opal-estate-custom-fields' ),
 				'icon'  => 'dashicons dashicons-menu',
 			],
 			[
 				'type'  => 'checkbox',
-				'title' => esc_html__( 'Checkbox', 'opaljob' ),
+				'title' => esc_html__( 'Checkbox', 'opal-estate-custom-fields' ),
 				'icon'  => 'dashicons dashicons-yes-alt',
 			],
 			[
 				'type'  => 'date',
-				'title' => esc_html__( 'Date', 'opaljob' ),
+				'title' => esc_html__( 'Date', 'opal-estate-custom-fields' ),
 				'icon'  => 'dashicons dashicons-calendar-alt',
 			],
 		] );

@@ -55,6 +55,6 @@ class Plugin {
 	 * Translations.
 	 */
 	public function i18n() {
-		load_plugin_textdomain( 'opalestate-packages', false, 'opal-estate-packages/languages' );
+		load_plugin_textdomain( 'opal-estate-custom-fields', false, 'opal-estate-custom-fields/languages' );
 	}
 }
