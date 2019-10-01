@@ -25,9 +25,12 @@ jQuery( document ).ready( function ( $ ) {
 
     form_key_change();
 
-    custom_fields_container.find( '.opalestate-iconpicker' ).each( function () {
-        $( this ).fontIconPicker();
-    } );
+    function iconpicker_init() {
+        custom_fields_container.find( '.opalestate-iconpicker' ).each( function () {
+            $( this ).fontIconPicker();
+        } );
+    }
+    iconpicker_init();
 
     custom_fields_container.on( 'click', '.panel-title', function ( e ) {
         e.preventDefault();
@@ -96,6 +99,7 @@ jQuery( document ).ready( function ( $ ) {
                         custom_fields_container.append( response.html );
                     }
                     form_key_change();
+                    iconpicker_init();
                 } else {
                     alert( opalestateCTF.text.try_again );
                 }

@@ -171,6 +171,8 @@ class Create_Fields {
 		wp_enqueue_style( 'opalestate-custom-fields', OPALESTATE_CUSTOM_FIELDS_PLUGIN_URL . 'assets/css/form-builder.css', [], '1.0' );
 		wp_enqueue_script( 'opalestate-custom-fields', OPALESTATE_CUSTOM_FIELDS_PLUGIN_URL . 'assets/js/form-builder.js', [ 'jquery' ], '1.0', false );
 		wp_enqueue_style( 'hint', OPALESTATE_CUSTOM_FIELDS_PLUGIN_URL . 'assets/css/hint.min.css', null, '1.3', false );
+		wp_register_style( 'fontawesome', OPALESTATE_PLUGIN_URL . 'assets/3rd/fontawesome/css/all.min.css', null, '5.11.2', false );
+
 		// Iconpicker.
 		wp_register_style( 'fonticonpicker', OPALESTATE_CUSTOM_FIELDS_PLUGIN_URL . 'assets/css/jquery.fonticonpicker.min.css', [], '2.0.0' );
 		wp_register_style( 'fonticonpicker-grey-theme', OPALESTATE_CUSTOM_FIELDS_PLUGIN_URL . 'assets/themes/grey-theme/jquery.fonticonpicker.grey.min.css', [ 'fontawesome' ], '2.0.0' );
