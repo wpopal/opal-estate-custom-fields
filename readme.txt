@@ -1,4 +1,4 @@
-=== Opal Estate Packages ===
+=== Opal Estate Custom Fields ===
 Contributors: wpopal
 Donate link: http://www.wpopal.com/
 Tags:  community, member, opalestate_addon, profile, ecommerce, subscription, membership, user
@@ -9,46 +9,11 @@ Stable tag: 1.0.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-It's another solution for the Opal Membership plugin. Seamlessly connects with Woocommerce to benefit from all variety of Woocommerce extensions and payment gateways.
+Create custom fields for Opal Estate Pro plugin.
 
 == Description ==
 
-Create estate membership packages as products. Seamlessly connects with Woocommerce to benefit from all variety of Woocommerce extensions and payment gateways. It's another solution for the Opal Membership plugin.
-
-= Create Membership Package =
-* Create a package the same a WooCommerce product with `Product type` is `Estate Package`
-* So many attributes for packages
-
-= Package attributes =
-* Maximum Purchased
-* Enable Expired Date
-* Expired After
-* Expired Date Type
-* Highlighted
-* Number of listings
-* Number of Featured listings
-* Unlimited listing
-
--=-=-=-=-=-=-=-=-=- Shortcodes -=-=-=-=-=-=-=-=-=-
-
-	- [opalestate_packages_collection] => show all packages
-
-= Manage Member Users Easily=
-
-* This plugin helps admin easily to manage all Member Users in the system when they register account for using Membership packages. Admin can check their profile information such as name, email, user
-id, address… via WooCommerce Order.
-
-= Support Multiple Payments=
-
-* Seamlessly connects with Woocommerce to benefit from all variety of Woocommerce extensions and payment gateways.
-
-= Unlimited Access Levels: =
-
-* Create unlimited number of membership access levels (basic, advanced, premium). You can charge more for higher access levels..
-
-= Content Access Control: =
-
-* Easy to access admin and control content professionally. Admin can create different access levels with control their content.
+This plugin allows you control and manage fields to disable as meta information and using for searchable..
 
 == Installation ==
 

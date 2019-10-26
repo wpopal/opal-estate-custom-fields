@@ -34,6 +34,7 @@ class Elements {
 			'description' => '',
 			'default'     => '',
 			'placeholder' => '',
+			'number'      => '',
 			'required'    => '',
 			'icon'        => '',
 		];
@@ -61,6 +62,8 @@ class Elements {
 					<?php $this->render_description( $description ); ?>
 
 					<?php $this->render_default( $default ); ?>
+
+					<?php $this->render_number( $number ); ?>
 
 					<?php $this->render_required( $required ); ?>
 
@@ -96,7 +99,8 @@ class Elements {
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a class="toggle-panel"><i class="dashicons dashicons-editor-alignleft"></i><?php esc_html_e( 'Textarea', 'opal-estate-custom-fields' ); ?>: <span><?php echo esc_html( $name ); ?></span></a>
+                        <a class="toggle-panel"><i class="dashicons dashicons-editor-alignleft"></i><?php esc_html_e( 'Textarea', 'opal-estate-custom-fields' ); ?>:
+                            <span><?php echo esc_html( $name ); ?></span></a>
                         <a href="#" class="remove-custom-field-item"><i class="dashicons dashicons-no"></i></a>
                     </h4>
                 </div>
@@ -144,7 +148,8 @@ class Elements {
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a class="toggle-panel"><i class="dashicons dashicons-calendar-alt"></i><?php esc_html_e( 'Date', 'opal-estate-custom-fields' ); ?>: <span><?php echo esc_html( $name ); ?></span></a>
+                        <a class="toggle-panel"><i class="dashicons dashicons-calendar-alt"></i><?php esc_html_e( 'Date', 'opal-estate-custom-fields' ); ?>:
+                            <span><?php echo esc_html( $name ); ?></span></a>
                         <a href="#" class="remove-custom-field-item"><i class="dashicons dashicons-no"></i></a>
                     </h4>
 
@@ -258,12 +263,14 @@ class Elements {
 
 					<?php $this->render_description( $description ); ?>
 
+                    <?php /**
                     <div class="form-group-field">
                         <label class="control-label label-field"><?php esc_html_e( 'Multiple', 'opal-estate-custom-fields' ); ?></label>
                         <div class="content-field">
                             <input type="checkbox" name="multiple[<?php echo esc_attr( $i ); ?>]" class="form-control multiple" value="1" <?php echo esc_attr( $multiple ) ? "checked" : "" ?> />
                         </div>
-                    </div>
+                    </div> **/
+                    ?>
 
 					<?php $this->render_required( $required ); ?>
 
@@ -345,7 +352,8 @@ class Elements {
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a class="toggle-panel"><i class="dashicons dashicons-yes-alt"></i><?php esc_html_e( 'Checkbox', 'opal-estate-custom-fields' ); ?>: <span><?php echo esc_html( $name ); ?></span></a>
+                        <a class="toggle-panel"><i class="dashicons dashicons-yes-alt"></i><?php esc_html_e( 'Checkbox', 'opal-estate-custom-fields' ); ?>:
+                            <span><?php echo esc_html( $name ); ?></span></a>
                         <a href="#" class="remove-custom-field-item"><i class="dashicons dashicons-no"></i></a>
                     </h4>
                 </div>
@@ -366,7 +374,7 @@ class Elements {
                         </div>
                     </div>
 
-					<?php $this->render_required( $required ); ?>
+					<?php // $this->render_required( $required ); ?>
 
 					<?php $this->render_icon( $icon ); ?>
                 </div>
@@ -386,8 +394,9 @@ class Elements {
         <div class="form-group-field">
             <label class="control-label label-field"><?php esc_html_e( 'Meta key', 'opal-estate-custom-fields' ); ?><span class="required"> *</span></label>
             <div class="content-field">
-                <input type="text" name="id[]" class="form-control input-meta-key etf-in" placeholder="<?php esc_html_e( 'Please Enter Meta Key', 'opal-estate-custom-fields' ); ?>" value="<?php echo esc_attr( $value
-				); ?>" required="required">
+                <input type="text" name="id[]" class="form-control input-meta-key etf-in" placeholder="<?php esc_html_e( 'Please Enter Meta Key', 'opal-estate-custom-fields' ); ?>"
+                       value="<?php echo esc_attr( $value
+				       ); ?>" required="required">
                 <p class="content-field__description">
 					<?php esc_html_e( 'Please enter word not contain blank, special characters. This field is used for search able, it should be lowercase or _ for example: your_key_here.' ); ?>
                 </p>
@@ -406,8 +415,9 @@ class Elements {
         <div class="form-group-field">
             <label class="control-label label-field"><?php esc_html_e( 'Title', 'opal-estate-custom-fields' ); ?><span class="required"> *</span></label>
             <div class="content-field">
-                <input type="text" name="name[]" class="form-control input-title etf-in" placeholder="<?php esc_attr_e( 'Please enter title.', 'opal-estate-custom-fields' ); ?>" value="<?php echo esc_attr( $value
-				); ?>" required="required">
+                <input type="text" name="name[]" class="form-control input-title etf-in" placeholder="<?php esc_attr_e( 'Please enter title.', 'opal-estate-custom-fields' ); ?>"
+                       value="<?php echo esc_attr( $value
+				       ); ?>" required="required">
             </div>
         </div>
 		<?php
@@ -423,8 +433,9 @@ class Elements {
         <div class="form-group-field">
             <label class="control-label label-field"><?php esc_html_e( 'Placeholder', 'opal-estate-custom-fields' ); ?></label>
             <div class="content-field">
-                <input type="text" name="placeholder[]" class="form-control input-placeholder etf-in" placeholder="<?php esc_attr_e( 'Please enter placeholder.', 'opal-estate-custom-fields' ); ?>" value="<?php echo
-				esc_attr( $value ); ?>">
+                <input type="text" name="placeholder[]" class="form-control input-placeholder etf-in" placeholder="<?php esc_attr_e( 'Please enter placeholder.', 'opal-estate-custom-fields' ); ?>"
+                       value="<?php echo
+				       esc_attr( $value ); ?>">
             </div>
         </div>
 		<?php
@@ -440,7 +451,8 @@ class Elements {
         <div class="form-group-field">
             <label class="control-label label-field"><?php esc_html_e( 'Description', 'opal-estate-custom-fields' ); ?></label>
             <div class="content-field">
-                <textarea name="description[]" class="input-description etf-textarea" placeholder="<?php esc_attr_e( 'Please enter description', 'opal-estate-custom-fields' ); ?>"><?php echo esc_html( $value );
+                <textarea name="description[]" class="input-description etf-textarea"
+                          placeholder="<?php esc_attr_e( 'Please enter description', 'opal-estate-custom-fields' ); ?>"><?php echo esc_html( $value );
 	                ?></textarea>
             </div>
         </div>
@@ -457,9 +469,10 @@ class Elements {
         <div class="form-group-field">
             <label class="control-label label-field"><?php esc_html_e( 'Default', 'opal-estate-custom-fields' ); ?></label>
             <div class="content-field">
-                <input type="text" name="default[]" class="form-control input-default etf-in" placeholder="<?php esc_attr_e( 'Please enter default', 'opal-estate-custom-fields' ); ?>" value="<?php echo esc_attr(
-					$value );
-				?>">
+                <input type="text" name="default[]" class="form-control input-default etf-in" placeholder="<?php esc_attr_e( 'Please enter default', 'opal-estate-custom-fields' ); ?>"
+                       value="<?php echo esc_attr(
+					       $value );
+				       ?>">
             </div>
         </div>
 		<?php
@@ -476,6 +489,25 @@ class Elements {
             <label class="control-label label-field"><?php esc_html_e( 'Required', 'opal-estate-custom-fields' ); ?></label>
             <div class="content-field">
                 <select name="required[]" class="form-control etf-in">
+                    <option value="" <?php selected( $value, '' ); ?>><?php esc_html_e( 'No', 'opal-estate-custom-fields' ); ?></option>
+                    <option value="yes" <?php selected( $value, 'yes' ); ?>><?php esc_html_e( 'Yes', 'opal-estate-custom-fields' ); ?></option>
+                </select>
+            </div>
+        </div>
+		<?php
+	}
+
+	/**
+	 * Render required.
+	 *
+	 * @param $value
+	 */
+	protected function render_number( $value ) {
+		?>
+        <div class="form-group-field">
+            <label class="control-label label-field"><?php esc_html_e( 'Number', 'opal-estate-custom-fields' ); ?></label>
+            <div class="content-field">
+                <select name="number[]" class="form-control etf-in">
                     <option value="" <?php selected( $value, '' ); ?>><?php esc_html_e( 'No', 'opal-estate-custom-fields' ); ?></option>
                     <option value="yes" <?php selected( $value, 'yes' ); ?>><?php esc_html_e( 'Yes', 'opal-estate-custom-fields' ); ?></option>
                 </select>

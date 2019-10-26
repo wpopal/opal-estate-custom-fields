@@ -51,6 +51,12 @@ class Create_Fields {
 									$custom_fields[ $key ]['default'] = '';
 								}
 
+                                if ( isset( $_POST['number'][ $case_common ] ) ) {
+                                    $custom_fields[ $key ]['number'] = sanitize_text_field( $_POST['number'][ $case_common ] );
+                                } else {
+                                    $custom_fields[ $key ]['number'] = '';
+                                }
+
 								$case_common++;
 								break;
 

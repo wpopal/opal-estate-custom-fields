@@ -1,8 +1,8 @@
 <?php
 namespace Opalestate_Custom_Fields;
 
-use Opalestate_Custom_Fields\Admin\Create_Fields;
 use Opalestate_Custom_Fields\Admin\Admin;
+use Opalestate_Custom_Fields\Admin\Metaboxes;
 
 /**
  * Set up and initialize
@@ -42,13 +42,14 @@ class Plugin {
 	 */
 	public function register_admin() {
 		new Admin();
+		new Metaboxes();
 	}
 
 	/**
 	 * Register core.
 	 */
 	public function register_core() {
-
+		new Handler();
 	}
 
 	/**
