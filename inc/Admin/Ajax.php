@@ -20,7 +20,7 @@ class Ajax {
 	 * Create custom type via AJAX.
 	 */
 	public function creator_custom_type() {
-		$type     = $_POST['type'];
+		$type     = sanitize_text_field( $_POST['type'] );
 		$elements = new Elements();
 		ob_start();
 
@@ -58,9 +58,9 @@ class Ajax {
 	public function create_option_select() {
 		if ( isset( $_POST['index'] ) && isset( $_POST['checked_default'] ) && isset( $_POST['option_index'] ) ) {
 			$args = [
-				'index'           => $_POST['index'],
-				'checked_default' => $_POST['checked_default'],
-				'option_index'    => $_POST['option_index'],
+				'index'           => sanitize_text_field( $_POST['index'] ),
+				'checked_default' => sanitize_text_field( $_POST['checked_default'] ),
+				'option_index'    => sanitize_text_field( $_POST['option_index'] ),
 			];
 
 			$elements = new Elements();
