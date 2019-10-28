@@ -1,0 +1,200 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Opal Estate Custom Fields\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-10-28 06:28+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: \n"
+"Language: \n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.3.1; wp-5.2.4"
+
+#: inc/Admin/Create_Fields.php:218
+msgid "Add new field"
+msgstr ""
+
+#: inc/Admin/Elements.php:260
+msgid "Add new option"
+msgstr ""
+
+#: inc/Admin/Create_Fields.php:190
+msgid "Are you sure reset fields?"
+msgstr ""
+
+#: inc/Admin/Create_Fields.php:307 inc/Admin/Elements.php:355
+msgid "Checkbox"
+msgstr ""
+
+#: inc/Admin/Admin.php:43
+msgid "Custom Fields"
+msgstr ""
+
+#: inc/Admin/Create_Fields.php:312 inc/Admin/Elements.php:151
+msgid "Date"
+msgstr ""
+
+#: inc/Admin/Elements.php:245 inc/Admin/Elements.php:319
+#: inc/Admin/Elements.php:368 inc/Admin/Elements.php:470
+msgid "Default"
+msgstr ""
+
+#: inc/Admin/Elements.php:452
+msgid "Description"
+msgstr ""
+
+#: inc/Admin/Create_Fields.php:191
+msgid "Duplicate meta key"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "http://www.wpopal.com"
+msgstr ""
+
+#. URI of the plugin
+msgid "http://www.wpopal.com/opal-estate"
+msgstr ""
+
+#: inc/Admin/Elements.php:529
+msgid "Icon"
+msgstr ""
+
+#: inc/Admin/Elements.php:230 inc/Admin/Elements.php:306
+msgid "Label"
+msgstr ""
+
+#: inc/Admin/Elements.php:395
+msgid "Meta key"
+msgstr ""
+
+#: inc/Admin/Elements.php:492 inc/Admin/Elements.php:511
+msgid "No"
+msgstr ""
+
+#: inc/Admin/Elements.php:508
+msgid "Number"
+msgstr ""
+
+#: inc/Admin/Elements.php:371
+msgid "Off"
+msgstr ""
+
+#: inc/Admin/Elements.php:372
+msgid "On"
+msgstr ""
+
+#. Name of the plugin
+msgid "Opal Estate Custom Fields"
+msgstr ""
+
+#: opal-estate-custom-fields.php:54
+#, php-format
+msgid ""
+"Opal Estate Custom Fields requires at least PHP version 5.6 to work, you are "
+"running version %s. Please contact to your administrator to upgrade PHP "
+"version!"
+msgstr ""
+
+#: opal-estate-custom-fields.php:34
+#, php-format
+msgid ""
+"Opal Estate Custom Fields requires at least WordPress version 4.9, you are "
+"running version %s. Please upgrade and try again!"
+msgstr ""
+
+#: inc/Admin/Elements.php:215
+msgid "Options"
+msgstr ""
+
+#: inc/Admin/Elements.php:434
+msgid "Placeholder"
+msgstr ""
+
+#: inc/Admin/Elements.php:472
+msgid "Please enter default"
+msgstr ""
+
+#: inc/Admin/Elements.php:455
+msgid "Please enter description"
+msgstr ""
+
+#: inc/Admin/Elements.php:397
+msgid "Please Enter Meta Key"
+msgstr ""
+
+#: inc/Admin/Elements.php:436
+msgid "Please enter placeholder."
+msgstr ""
+
+#: inc/Admin/Elements.php:418
+msgid "Please enter title."
+msgstr ""
+
+#: opal-estate-custom-fields.php:82
+msgid ""
+"Please note that the <strong>Opal Packages</strong> plugin is meant to be "
+"used only with the <strong>Opal Estate Pro</strong> plugin.</p>"
+msgstr ""
+
+#: inc/Admin/Create_Fields.php:192
+msgid "Please try again!"
+msgstr ""
+
+#: inc/Admin/Admin.php:71
+msgid "Property builder using for show"
+msgstr ""
+
+#: inc/Admin/Elements.php:489
+msgid "Required"
+msgstr ""
+
+#: inc/Admin/Create_Fields.php:275
+msgid "Reset"
+msgstr ""
+
+#: inc/Admin/Create_Fields.php:271
+msgid "Save"
+msgstr ""
+
+#: inc/Admin/Create_Fields.php:302 inc/Admin/Elements.php:205
+msgid "Select"
+msgstr ""
+
+#: inc/Admin/Create_Fields.php:292 inc/Admin/Elements.php:51
+msgid "Text"
+msgstr ""
+
+#: inc/Admin/Create_Fields.php:297
+msgid "Text area"
+msgstr ""
+
+#: inc/Admin/Elements.php:102
+msgid "Textarea"
+msgstr ""
+
+#. Description of the plugin
+msgid ""
+"This plugin allows you control and manage fields to disable as meta "
+"information and using for searchable.."
+msgstr ""
+
+#: inc/Admin/Elements.php:416
+msgid "Title"
+msgstr ""
+
+#: inc/Admin/Elements.php:237 inc/Admin/Elements.php:313
+msgid "Value"
+msgstr ""
+
+#. Author of the plugin
+msgid "WPOPAL"
+msgstr ""
+
+#: inc/Admin/Elements.php:493 inc/Admin/Elements.php:512
+msgid "Yes"
+msgstr ""
