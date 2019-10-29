@@ -62,7 +62,7 @@ class Create_Fields {
 
 							case 'select':
 								if ( isset( $_POST['select_options_value'][ $case_select ] ) && $_POST['select_options_value'][ $case_select ] ) {
-									$option_values = sanitize_text_field( $_POST['select_options_value'][ $case_select ] );
+									$option_values = $_POST['select_options_value'][ $case_select ];
 									if ( $option_values ) {
 										foreach ( $option_values as $k => $v ) {
 											$option_values[ $k ] = sanitize_text_field( $v );
@@ -73,7 +73,7 @@ class Create_Fields {
 								}
 
 								if ( isset( $_POST['select_options_label'][ $case_select ] ) && $_POST['select_options_label'][ $case_select ] ) {
-									$option_labels = sanitize_text_field( $_POST['select_options_label'][ $case_select ] );
+									$option_labels = $_POST['select_options_label'][ $case_select ];
 									if ( $option_labels ) {
 										foreach ( $option_labels as $k => $v ) {
 											$option_labels[ $k ] = sanitize_text_field( $v );
