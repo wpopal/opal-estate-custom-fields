@@ -16,6 +16,7 @@ class Metaboxes {
 		$this->settings = get_option( 'opal_estate_custom_fields', [] );
 
 		add_filter( 'opalestate_postype_property_metaboxes_fields_info', [ $this, 'register_property_metabox' ] );
+		add_filter( 'opalestate_metaboxes_public_info_fields', [ $this, 'register_public_property_metabox' ] );
 		add_filter( 'opalestate_property_meta_icon', [ $this, 'opalestate_property_meta_icon' ], 10, 2 );
 	}
 
@@ -29,7 +30,7 @@ class Metaboxes {
 	}
 
 	/**
-	 * Register property metabox.
+	 * Register public property metabox.
 	 *
 	 * @param array $fields Fields.
 	 * @return array
@@ -38,6 +39,37 @@ class Metaboxes {
 		$settings = $this->get_settings();
 		if ( ! $settings ) {
 			return $fields;
+		}
+
+		foreach ( $settings as $setting ) {
+			$field = $this->parse_setting_fields( $setting );
+			if ( $field ) {
+				$fields[] = $field;
+			}
+		}
+
+		return $fields;
+	}
+
+	/**
+	 * Register property metabox.
+	 *
+	 * @param array $fields Fields.
+	 * @return array
+	 */
+	public function register_public_property_metabox( $fields ) {
+		$settings = $this->get_settings();
+		if ( ! $settings ) {
+			return $fields;
+		}
+
+		$prefix = OPALESTATE_PROPERTY_PREFIX;
+		foreach ( $fields as $key => $field ) {
+			if ( "{$prefix}amountrooms" == $field['id'] ) {
+				unset( $field['after_row'] );
+				unset( $fields[ $key ] );
+				$fields[] = $field;
+			}
 		}
 
 		foreach ( $settings as $setting ) {
