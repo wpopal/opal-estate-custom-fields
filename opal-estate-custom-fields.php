@@ -79,7 +79,7 @@ define( 'OPALESTATE_CUSTOM_FIELDS_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 function opalestate_custom_fields_admin_notice() {
 	if ( ! class_exists( 'OpalEstate' ) ) {
 		echo '<div class="error">';
-		echo '<p>' . __( 'Please note that the <strong>Opal Packages</strong> plugin is meant to be used only with the <strong>Opal Estate Pro</strong> plugin.</p>', 'opal-estate-custom-fields' );
+		echo '<p>' . __( 'Please note that the <strong>Opal Estate Custom Fields</strong> plugin is meant to be used only with the <strong>Opal Estate Pro</strong> plugin.</p>', 'opal-estate-custom-fields' );
 		echo '</div>';
 	}
 }

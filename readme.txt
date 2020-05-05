@@ -1,5 +1,5 @@
 === Opal Estate Custom Fields ===
-Contributors: wpopal
+Contributors: wpopal, ndoublehwp
 Donate link: http://www.wpopal.com/
 Tags:  opalestate_addon, opal estate custom fields, estate
 Requires at least: 4.6

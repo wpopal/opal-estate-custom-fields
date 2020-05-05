@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Get CMB2 field type.
+ *
+ * @param $field_type
+ * @return string
+ */
 function opalestate_custom_fields_get_cmb2_field_type( $field_type ) {
 	switch ( $field_type ) {
 		case 'text':
@@ -18,6 +24,12 @@ function opalestate_custom_fields_get_cmb2_field_type( $field_type ) {
 	return $type;
 }
 
+/**
+ * Parse setting field.
+ *
+ * @param $setting
+ * @return array
+ */
 function opalestate_custom_fields_parse_setting_field( $setting ) {
 	$defaults = apply_filters( 'opalestate_custom_fields_parse_setting_fields', [
 		'type'                => '',
