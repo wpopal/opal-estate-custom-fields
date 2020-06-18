@@ -3,7 +3,7 @@
  * Plugin Name: Opal Estate Custom Fields
  * Plugin URI: http://www.wpopal.com/opal-estate
  * Description: This plugin allows you control and manage fields to disable as meta information and using for searchable..
- * Version: 1.0.1
+ * Version: 1.0.2
  * Author: WPOPAL
  * Author URI: http://www.wpopal.com
  * Requires at least: 4.9
@@ -69,7 +69,7 @@ if ( defined( 'OPALESTATE_CUSTOM_FIELDS_VERSION' ) ) {
 	return;
 }
 
-define( 'OPALESTATE_CUSTOM_FIELDS_VERSION', '1.0.1' );
+define( 'OPALESTATE_CUSTOM_FIELDS_VERSION', '1.0.2' );
 define( 'OPALESTATE_CUSTOM_FIELDS_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 define( 'OPALESTATE_CUSTOM_FIELDS_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
