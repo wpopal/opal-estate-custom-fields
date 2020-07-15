@@ -111,6 +111,12 @@ class Metaboxes {
 					'default'     => $setting['default'],
 				];
 
+				if ( 'checkbox' === $setting['type'] ) {
+					$field['default'] = 'off' !== $setting['default'] ? $setting['default'] : '';
+				} else {
+					$field['default'] = $setting['default'];
+				}
+
 				$attributes = [];
 
 				if ( $setting['number'] ) {
