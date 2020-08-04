@@ -175,7 +175,7 @@ class Create_Fields {
 	public function render() {
 		wp_enqueue_script( 'fonticonpicker', OPALESTATE_CUSTOM_FIELDS_PLUGIN_URL . 'assets/js/jquery.fonticonpicker.min.js', [], '2.0.0' );
 		wp_enqueue_style( 'opalestate-custom-fields', OPALESTATE_CUSTOM_FIELDS_PLUGIN_URL . 'assets/css/form-builder.css', [], '1.0' );
-		wp_enqueue_script( 'opalestate-custom-fields', OPALESTATE_CUSTOM_FIELDS_PLUGIN_URL . 'assets/js/form-builder.js', [ 'jquery' ], '1.0', false );
+		wp_enqueue_script( 'opalestate-custom-fields', OPALESTATE_CUSTOM_FIELDS_PLUGIN_URL . 'assets/js/form-builder.js', [ 'jquery', 'jquery-ui-sortable' ], '1.0', false );
 		wp_enqueue_style( 'hint', OPALESTATE_CUSTOM_FIELDS_PLUGIN_URL . 'assets/css/hint.min.css', null, '1.3', false );
 		wp_register_style( 'fontawesome', OPALESTATE_PLUGIN_URL . 'assets/3rd/fontawesome/css/all.min.css', null, '5.11.2', false );
 
