@@ -15,7 +15,7 @@ function opalestate_custom_fields_get_cmb2_field_type( $field_type ) {
 			$type = $field_type;
 			break;
 		case 'date':
-			$type = 'datepicker';
+			$type = 'text_date';
 			break;
 		default:
 			$type = 'text';
